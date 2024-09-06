@@ -27,7 +27,6 @@ $stmt->execute();
 $stmt->bind_result($user_role);
 $stmt->fetch();
 $stmt->close();
-$conn->close();
 
 // Redirigir basado en el rol del usuario
 switch ($user_role) {

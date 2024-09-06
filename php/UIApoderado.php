@@ -37,8 +37,5 @@
         case 'ADMIN':
             header("Location: UIAdmin.php"); // Redirige a la interfaz de apoderado
             exit();
-        default:
-            header("Location: ../index.php"); // Redirige al inicio de sesión si el rol no es reconocido
-            exit();
     }
 ?>

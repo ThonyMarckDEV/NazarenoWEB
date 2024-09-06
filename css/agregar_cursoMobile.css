@@ -73,20 +73,21 @@
         margin-bottom: 40px;
     }
 
+    /* Notificación */
     .notification {
         display: none;
         position: fixed;
         top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 10px; /* Mueve la notificación al lado derecho */
         background-color: #4CAF50; /* Color verde para éxito */
         color: white;
         padding: 16px;
         border-radius: 5px;
-        z-index: 1000;
+        z-index: 8000;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         font-size: 18px;
+        width: calc(61% - 20px); /* Ocupa el ancho del contenido principal menos 20px de padding */
     }
     
     .notification.error {

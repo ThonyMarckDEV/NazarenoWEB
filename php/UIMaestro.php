@@ -39,3 +39,31 @@
             exit();
     }
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro - C.E.B.E</title>
+    <link rel="stylesheet" href="../css/UIMaestroPC.css">
+    <link rel="stylesheet" href="../css/UIMaestroMobile.css">
+    <!-- Sidebar CSS -->
+    <link rel="stylesheet" href="../css/sidebarMAESTROPC.css">
+    <link rel="stylesheet" href="../css/sidebarMAESTROMobile.css">
+</head>
+<body>
+    <div class="container">
+
+       <!-- Incluir la Sidebar -->
+       <?php include 'sidebarMAESTRO.php'; ?>
+
+        <!-- Main Content Placeholder -->
+        <main class="main-content">
+            <section>
+                <h2>Bienvenido al Panel de Maestro</h2>
+                <p>Seleccione una opción del menú lateral para comenzar.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
