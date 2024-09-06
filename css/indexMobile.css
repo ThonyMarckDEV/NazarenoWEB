@@ -1,0 +1,154 @@
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
+    /* Estilos básicos para móviles */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 800px;
+        background-color: #000000;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        position: relative; /* Para posicionar correctamente el h1 y la luz */
+        overflow: hidden; /* Para ocultar cualquier desbordamiento del brillo */
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área del fondo */
+        background-position: center; /* Centra la imagen en el fondo */
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
+    }
+
+    /* Estilos para el encabezado h1 */
+    h1 {
+        font-size: 36px; /* Tamaño más pequeño del texto para pantallas móviles */
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        position: absolute; /* Posicionamiento absoluto para colocar sobre el formulario */
+        top: 20px; /* Ajusta el espacio desde la parte superior */
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%); /* Centra el h1 y lo levanta */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+        border-radius: 15px; /* Bordes redondeados */
+        backdrop-filter: blur(10px); /* Efecto de difuminado en el fondo */
+        -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil para el efecto de vidrio */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Sombra difusa */
+        z-index: 900; /* Asegúrate de que esté sobre otros elementos */
+        animation: float 3s ease-in-out infinite; /* Añadir animaciones */
+    }
+    
+    /* Animación de flotación */
+    @keyframes float {
+        0%, 100% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0);
+        }
+        50% {
+            transform: translateX(-50%) translateY(-55%) translateZ(0);
+        }
+    }
+
+    /* Contenedor del formulario y título */
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 80%;
+        text-align: center;
+        padding: 0 10px; /* Reducir el padding para pantallas pequeñas */
+        position: absolute; /* Posicionamiento absoluto para colocar el formulario justo debajo del encabezado */
+        top: -30px; /* Espacio desde la parte superior (ajusta según el tamaño del encabezado) */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Estilo del título */
+    h2 {
+        margin-bottom: 20px; /* Reducir el margen debajo del título */
+        color: #fff;
+        font-size: 24px; /* Reducir el tamaño del texto */
+        z-index: 900;
+    }
+
+    /* Estilo del contenedor del formulario */
+    form {
+        background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco con transparencia */
+        padding: 20px; /* Reducir el padding */
+        border-radius: 15px; /* Aumentar el radio de borde */
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* Sombra más difusa */
+        width: 90%; /* Ajustar el ancho del formulario para pantallas móviles */
+        max-width: 400px; /* Limitar el ancho máximo */
+        backdrop-filter: blur(10px); /* Efecto de difuminado en el fondo */
+        -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil para el efecto de vidrio */
+        z-index: 900;
+    }
+
+    /* Estilo de las etiquetas */
+    label {
+        display: block;
+        margin-bottom: 10px; /* Reducir el margen debajo de las etiquetas */
+        color: #fff;
+        font-size: 16px; /* Reducir el tamaño del texto */
+    }
+
+    /* Estilo de los campos de entrada */
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px; /* Reducir el padding */
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 10px; /* Aumentar el radio de borde */
+        background-color: #333;
+        color: #fff;
+        font-size: 16px; /* Reducir el tamaño del texto */
+        box-sizing: border-box;
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Estilo del botón de envío */
+    input[type="submit"] {
+        width: 100%;
+        padding: 12px; /* Reducir el padding */
+        background-color: #fff;
+        color: #000;
+        border: none;
+        border-radius: 10px; /* Aumentar el radio de borde */
+        font-size: 16px; /* Reducir el tamaño del texto */
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    /* Efecto hover del botón de envío */
+    input[type="submit"]:hover {
+        background-color: #ddd;
+        transform: scale(1.05);
+    }
+
+    /* Estilos básicos para la notificación */
+    .notification {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f44336; /* Rojo para el mensaje de error */
+        color: #fff;
+        padding: 10px; /* Reducir el padding */
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+    }
+
+    .notification.show {
+        opacity: 1;
+    }
+}
