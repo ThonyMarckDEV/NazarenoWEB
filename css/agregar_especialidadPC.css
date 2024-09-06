@@ -25,7 +25,6 @@
     .main-content {
         flex-grow: 1;
         padding: 40px;
-        width: 500px;
         background-color: #fff;
     }
 
@@ -36,6 +35,7 @@
     }
 
     form {
+        width: 500px;
         display: flex;
         flex-direction: column;
     }

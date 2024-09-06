@@ -1,62 +1,94 @@
 <?php
-session_start();
+    session_start();
 
-// Incluir la conexión a la base de datos
-include 'conexion.php';
+    // Incluir la conexión a la base de datos
+    include 'conexion.php';
 
-// Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['user'])) {
-    header("Location: ../index.php"); // Redirige al inicio de sesión si no hay sesión iniciada
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombreCurso = $_POST['nombreCurso'] ?: null;
-    $idEspecialidad = $_POST['idEspecialidad'] ?: null;
-    
-    // Validar los datos recibidos
-    if (empty($nombreCurso) || empty($idEspecialidad)) {
-        header("Location: agregar_curso.php?status=error&message=" . urlencode("Todos los campos son requeridos."));
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['user'])) {
+        header("Location: ../index.php"); // Redirige al inicio de sesión si no hay sesión iniciada
         exit();
     }
 
-    // Insertar el curso en la base de datos
-    $sqlCurso = "INSERT INTO cursos (nombreCurso, idEspecialidad, cupos) VALUES (?, ?, ?)";
-    $stmtCurso = $conn->prepare($sqlCurso);
-    $cupos = 10; // Valor por defecto
-    $stmtCurso->bind_param("ssi", $nombreCurso, $idEspecialidad, $cupos);
+    // Incluir la conexión a la base de datos
+    include 'conexion.php'; // Asegúrate de que la ruta es correcta
 
-    if ($stmtCurso->execute()) {
-        $idCurso = $stmtCurso->insert_id; // Obtener el ID del curso recién insertado
+    // Obtener el nombre de usuario de la sesión
+    $username = $_SESSION['user'];
 
-        // Insertar los módulos en la base de datos
-        $sqlModulo = "INSERT INTO modulos (nombre, idCurso) VALUES (?, ?)";
-        $stmtModulo = $conn->prepare($sqlModulo);
-        
-        // Lista de nombres de módulos a agregar
-        $modulos = [
-            'Módulo 1',
-            'Módulo 2',
-            'Módulo 3',
-            'Módulo 4',
-            'Módulo 5',
-            'Módulo 6'
-        ];
-
-        foreach ($modulos as $modulo) {
-            $stmtModulo->bind_param("si", $modulo, $idCurso);
-            $stmtModulo->execute();
-        }
-
-        header("Location: agregar_curso.php?status=success");
-    } else {
-        header("Location: agregar_curso.php?status=error&message=" . urlencode($conn->error));
+    // Preparar y ejecutar la consulta para obtener el rol del usuario
+    $stmt = $conn->prepare("SELECT rol FROM usuarios WHERE username = ?");
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $conn->error);
     }
 
-    $stmtCurso->close();
-    $stmtModulo->close();
+    $stmt->bind_param("s", $username); // Cambia el tipo de parámetro a 's' para string
+    $stmt->execute();
+    $stmt->bind_result($user_role);
+    $stmt->fetch();
+    $stmt->close();
     $conn->close();
-}
+
+    // Redirigir basado en el rol del usuario
+    switch ($user_role) {
+        case 'ALUMNO':
+            header("Location: UIAlumno.php"); // Redirige a la interfaz de administrador
+            exit();
+        case 'MAESTRO':
+            header("Location: UIMaestro.php"); // Redirige a la interfaz de maestro
+            exit();
+        case 'APODERADO':
+            header("Location: UIApoderado.php"); // Redirige a la interfaz de apoderado
+            exit();
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $nombreCurso = $_POST['nombreCurso'] ?: null;
+        $idEspecialidad = $_POST['idEspecialidad'] ?: null;
+        
+        // Validar los datos recibidos
+        if (empty($nombreCurso) || empty($idEspecialidad)) {
+            header("Location: agregar_curso.php?status=error&message=" . urlencode("Todos los campos son requeridos."));
+            exit();
+        }
+
+        // Insertar el curso en la base de datos
+        $sqlCurso = "INSERT INTO cursos (nombreCurso, idEspecialidad, cupos) VALUES (?, ?, ?)";
+        $stmtCurso = $conn->prepare($sqlCurso);
+        $cupos = 10; // Valor por defecto
+        $stmtCurso->bind_param("ssi", $nombreCurso, $idEspecialidad, $cupos);
+
+        if ($stmtCurso->execute()) {
+            $idCurso = $stmtCurso->insert_id; // Obtener el ID del curso recién insertado
+
+            // Insertar los módulos en la base de datos
+            $sqlModulo = "INSERT INTO modulos (nombre, idCurso) VALUES (?, ?)";
+            $stmtModulo = $conn->prepare($sqlModulo);
+            
+            // Lista de nombres de módulos a agregar
+            $modulos = [
+                'Módulo 1',
+                'Módulo 2',
+                'Módulo 3',
+                'Módulo 4',
+                'Módulo 5',
+                'Módulo 6'
+            ];
+
+            foreach ($modulos as $modulo) {
+                $stmtModulo->bind_param("si", $modulo, $idCurso);
+                $stmtModulo->execute();
+            }
+
+            header("Location: agregar_curso.php?status=success");
+        } else {
+            header("Location: agregar_curso.php?status=error&message=" . urlencode($conn->error));
+        }
+
+        $stmtCurso->close();
+        $stmtModulo->close();
+        $conn->close();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">

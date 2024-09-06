@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $idUser = $row['idUsuario'];
     $status = $row['status'];
-    $perfil = $row['rol'];
+    $rol = $row['rol'];
     $hashed_password = $row['password'];
 
     // Verificar si la contraseña es correcta
@@ -40,10 +40,10 @@ if ($result->num_rows > 0) {
             
             // Establecer la sesión
             $_SESSION['user'] = $username;
-            $_SESSION['rol'] = $perfil;
+            $_SESSION['rol'] = $rol;
 
             // Redirigir según el rol del usuario
-            switch ($perfil) {
+            switch ($rol) {
                 case 'ADMIN':
                     header("Location: UIAdmin.php");
                     break;
