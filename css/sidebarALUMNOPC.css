@@ -3,6 +3,7 @@
 @media (min-width: 991px) {
      /* Sidebar Styles */
      .sidebar {
+        height: 1000px;
         width: 250px;
         background-color: #ffffff;
         border-right: 1px solid #ddd;

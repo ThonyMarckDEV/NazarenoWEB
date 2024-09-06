@@ -12,7 +12,7 @@
             <div class="divider"></div>
             <nav class="menu">
                 <ul>
-                    <li><a href="">Perfil</a></li>
+                    <li><a href="perfilAlumno.php">Perfil</a></li>
                     <li><a href="">Anuncios</a></li>
                     <li><a href="">Cursos</a></li>
                     <li><a href="">Calificaciones</a></li>

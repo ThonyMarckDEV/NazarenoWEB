@@ -15,6 +15,8 @@
                     <li><a href="agregar_usuario.php">Agregar Usuarios</a></li>
                     <li><a href="agregar_especialidad.php">Agregar Especialidad</a></li>
                     <li><a href="agregar_curso.php">Agregar Cursos</a></li>
+                    <li><a href="asignarEspecialidadDocente.php">Asignar Curso Docente</a></li>
+                    <li><a href="matricularEstudiante.php">Matricular Estudiante</a></li>
                 </ul>
             </nav>
             <div class="logout">

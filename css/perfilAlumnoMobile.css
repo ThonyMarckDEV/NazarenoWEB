@@ -1,0 +1,146 @@
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
+    /* Reset de márgenes y paddings para asegurar consistencia */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff; /* Color de fondo suave */
+    }
+
+    form {
+        margin-top: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* Alinea todo el contenido a la derecha */
+        width: 61%; /* Ocupa el 61% restante de la pantalla */
+        margin-left: auto; /* Desplaza el contenido hacia la derecha */
+    }
+
+    .perfil-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* Alinea los elementos a la derecha */
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .perfil-foto {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* Alinea la imagen y el label a la derecha */
+        margin-bottom: 20px;
+    }
+
+    .perfil-datos {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 0 10px;
+        text-align: right; /* Alinea el texto a la derecha */
+    }
+
+    .perfil-foto label {
+        margin-bottom: 10px;
+        font-size: 18px;
+        text-align: right; /* Alinea el label a la derecha */
+    }
+
+    .perfil-foto input[type="file"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .profile-pic {
+        width: 150px; /* Tamaño fijo para móvil */
+        height: 150px; /* Tamaño fijo para móvil */
+        object-fit: cover; /* Asegura que la imagen se ajuste dentro del cuadro manteniendo el aspecto */
+        border-radius: 50%; /* Imagen circular */
+        display: block;
+        margin: 10px auto; /* Centra la imagen */
+    }
+
+    .perfil-datos label {
+        color: #4e5d6c;
+        margin-bottom: 5px;
+        font-size: 16px;
+        text-align: right; /* Alinea las etiquetas a la derecha */
+    }
+
+    .perfil-datos input {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        text-align: right; /* Alinea el texto dentro de los inputs a la derecha */
+    }
+
+    /* Estilos para el botón de actualizar */
+    .actualizarBtn {
+        padding: 10px;
+        background-color: #000000; /* Color del botón */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: right;
+    }
+
+    .actualizarBtn:hover {
+        background-color: #383736; /* Color del botón al pasar el cursor */
+    }
+
+    /* Estilos para los botones de editar */
+    .editarBtn {
+        padding: 10px;
+        background-color: #000000; /* Color de los botones de editar */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .editarBtn:hover {
+        background-color: #383736; /* Color del botón al pasar el cursor */
+    }
+
+    .labelfoto {
+        font-size: 18px;
+        text-align: right; /* Alinea la etiqueta a la derecha */
+    }
+
+     /* Notificación */
+     .notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 10px; /* Mueve la notificación al lado derecho */
+        background-color: #4CAF50; /* Color verde para éxito */
+        color: white;
+        padding: 16px;
+        border-radius: 5px;
+        z-index: 8000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 18px;
+        width: calc(61% - 20px); /* Ocupa el ancho del contenido principal menos 20px de padding */
+    }
+
+    .notification.show {
+        display: block;
+    }
+}

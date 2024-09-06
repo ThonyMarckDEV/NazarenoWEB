@@ -1,4 +1,3 @@
-
  <aside class="sidebar">
             <div class="logo-section">
                 <a href="UIMaestro.php"><img src="../img/C.E.B.E.LOGO.png" alt="Logo" class="logo-img"></a>
