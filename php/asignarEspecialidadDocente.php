@@ -27,10 +27,10 @@ $stmt->close();
 
 // Redirigir basado en el rol del usuario
 switch ($user_role) {
-    case 'ALUMNO':
+    case 'ESTUDIANTE':
         header("Location: UIAlumno.php"); // Redirige a la interfaz de administrador
         exit();
-    case 'MAESTRO':
+    case 'DOCENTE':
         header("Location: UIMaestro.php"); // Redirige a la interfaz de maestro
         exit();
     case 'APODERADO':
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="">Seleccione un docente</option>
                         <?php
                         // Obtener la lista de docentes
-                        $sql = "SELECT idUsuario, CONCAT(nombres, ' ', apellidos) AS nombreCompleto FROM usuarios WHERE rol = 'MAESTRO';";
+                        $sql = "SELECT idUsuario, CONCAT(nombres, ' ', apellidos) AS nombreCompleto FROM usuarios WHERE rol = 'DOCENTE'";
                         $result = $conn->query($sql);
                         
                         while ($row = $result->fetch_assoc()) {

@@ -28,7 +28,7 @@
 
     // Redirigir basado en el rol del usuario
     switch ($user_role) {
-        case 'ALUMNO':
+        case 'ESTUDIANTE':
             header("Location: UIAlumno.php"); // Redirige a la interfaz de administrador
             exit();
         case 'ADMIN':

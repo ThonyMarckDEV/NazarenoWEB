@@ -30,10 +30,10 @@ $stmt->close();
 
 // Redirigir basado en el rol del usuario
 switch ($user_role) {
-    case 'ALUMNO':
+    case 'ESTUDIANTE':
         header("Location: UIAlumno.php"); // Redirige a la interfaz de administrador
         exit();
-    case 'MAESTRO':
+    case 'DOCENTE':
         header("Location: UIMaestro.php"); // Redirige a la interfaz de maestro
         exit();
     case 'APODERADO':
@@ -124,15 +124,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
         <!-- Incluir la Sidebar -->
         <?php include 'sidebarADMIN.php'; ?>
-
         <!-- Main Content -->
         <main class="main-content">
             <section>
                 <h2>Agregar Usuario</h2>
                 <form action="agregar_usuario.php" method="POST" enctype="multipart/form-data">
-                    <!-- Formulario de usuario -->
+                    <!-- Contenedor de input para rol y select -->
+                    <div class="role-container">
+                        <input type="text" id="rolInput" name="rol" placeholder="Seleccionar rol" readonly required>
+                        <select id="roleSelect">
+                            <option value="">Seleccionar</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="ESTUDIANTE">ESTUDIANTE</option>
+                            <option value="DOCENTE">DOCENTE</option>
+                            <option value="APODERADO">APODERADO</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Resto del formulario -->
                     <input type="text" name="username" placeholder="Nombre de usuario" required>
-                    <input type="text" name="rol" placeholder="Rol (ADMIN, ESTUDIANTE, MAESTRO, APODERADO)" required>
                     <input type="text" name="nombres" placeholder="Nombres" required>
                     <input type="text" name="apellidos" placeholder="Apellidos" required>
                     <input type="text" name="dni" placeholder="DNI" required>
@@ -174,6 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }, 3000);
             }
         };
+    </script>
+    <script>
+    // JavaScript para seleccionar el rol del combo box y colocarlo en el campo de texto
+    document.getElementById('roleSelect').addEventListener('change', function() {
+        var selectedRole = this.value;
+        document.getElementById('rolInput').value = selectedRole;
+    });
     </script>
 </body>
 </html>

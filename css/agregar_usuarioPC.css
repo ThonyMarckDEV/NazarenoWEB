@@ -1,4 +1,3 @@
-/* Estilos generales que ya tienes */
 @media (min-width: 991px) {
     * {
         margin: 0;
@@ -6,7 +5,7 @@
         box-sizing: border-box;
         font-family: Arial, sans-serif;
     }
-    
+
     body {
         background-color: #f9f9f9;
         display: flex;
@@ -42,6 +41,24 @@
 
     form input {
         margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    /* Estilos para el contenedor del rol y combobox */
+    .role-container {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Espacio entre el campo de texto y el combobox */
+    }
+
+    .role-container input {
+        flex-grow: 1;
+    }
+
+    form select {
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;

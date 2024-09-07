@@ -66,5 +66,14 @@ if (isset($_SESSION['user'])) {
             }
            }
         </script>
+        <script>
+            if (status === 'error') {
+                notification.innerText = 'Usuario y/o Contraseña incorrecto.: ' + decodeURIComponent(message);
+                notification.classList.add('error', 'show');
+                setTimeout(function() {
+                    notification.classList.remove('show', 'error');
+                }, 3000);
+            }
+        </script>
     </body>
 </html>

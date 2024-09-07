@@ -30,7 +30,7 @@ switch ($user_role) {
     case 'ADMIN':
         header("Location: UIAdmin.php"); // Redirige a la interfaz de administrador
         exit();
-    case 'MAESTRO':
+    case 'DOCENTE':
         header("Location: UIMaestro.php"); // Redirige a la interfaz de maestro
         exit();
     case 'APODERADO':

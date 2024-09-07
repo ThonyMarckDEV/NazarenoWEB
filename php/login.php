@@ -25,9 +25,7 @@ if ($result->num_rows > 0) {
 
     // Verificar si la contraseña es correcta
     if (password_verify($pass, $hashed_password)) {
-        // Verificar si el usuario ya tiene una sesión activa
         if ($status === 'loggedOn') {
-            // Redirigir a index.php con un mensaje de error
             $_SESSION['error'] = "Ya hay una sesión activa con este usuario.";
             header("Location: ../index.php");
             exit();
@@ -37,7 +35,7 @@ if ($result->num_rows > 0) {
             $update_stmt = $conn->prepare($update_sql);
             $update_stmt->bind_param("i", $idUser);
             $update_stmt->execute();
-            
+
             // Establecer la sesión
             $_SESSION['user'] = $username;
             $_SESSION['rol'] = $rol;
@@ -50,27 +48,27 @@ if ($result->num_rows > 0) {
                 case 'ESTUDIANTE':
                     header("Location: UIAlumno.php");
                     break;
-                case 'MAESTRO':
+                case 'DOCENTE':
                     header("Location: UIMaestro.php");
                     break;
                 case 'APODERADO':
                     header("Location: UIApoderado.php");
                     break;
                 default:
-                    // Redirigir a una página de error o logout si no se reconoce el rol
-                    $_SESSION['error'] = "Rol de usuario no válido.";
-                    header("Location: ../index.php");
-                    break;
+                    header("Location: index.php?status=error");
+                    exit();
             }
             exit();
         }
     } else {
-        // Contraseña incorrecta
-        echo "Usuario o contraseña incorrectos.";
+        $_SESSION['error'] = "Usuario y/o contraseña incorrectos.";
+        header("Location: ../index.php");
+        exit();
     }
 } else {
-    // No se encontraron credenciales válidas
-    echo "Usuario o contraseña incorrectos.";
+    $_SESSION['error'] = "Usuario y/o contraseña incorrectos.";
+    header("Location: ../index.php");
+    exit();
 }
 
 $stmt->close();
