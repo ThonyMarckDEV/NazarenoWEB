@@ -61,7 +61,7 @@
         <main class="main-content">
             <section>
                 <h2>Bienvenido Alumno!!</h2>
-                <p>Seleccione una opción del menú lateral para comenzar.</p>
+                <p style="color:white">Seleccione una opción del menú lateral para comenzar.</p>
             </section>
         </main>
     </div>

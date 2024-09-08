@@ -3,18 +3,17 @@
 @media (max-width: 767px) {
     /* Sidebar Styles */
     .sidebar {
-        width: 39%;
+        width: 43%; /* Ajusta el ancho de la sidebar en móviles */
         background-color: #ffffff;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
+        border-right: 2px solid #000000;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 10px;
+        padding: 15px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         position: fixed;
         top: 0;
-        left: 0;
+        left: -10px;
         height: 100%;
         z-index: 1000;
     }
@@ -27,13 +26,13 @@
     }
 
     .logo-img {
-        width: 30px;
-        height: 30px;
+        width: 35px; /* Tamaño ajustado para móviles */
+        height: 35px;
         margin-right: 10px;
     }
 
     .logo-section h2 {
-        font-size: 1.2rem;
+        font-size: 1.4rem; /* Ajusta el tamaño del texto */
         font-weight: bold;
         color: #333;
     }
@@ -42,11 +41,12 @@
         width: 100%;
         height: 2px;
         background-color: #000;
-        margin-top: 1opx;
+        margin-bottom: 15px;
     }
 
     .menu {
         flex-grow: 1;
+        margin-top: 10px;
     }
 
     .menu ul {
@@ -60,11 +60,12 @@
     }
 
     .menu ul li a {
+        display: flex;
+        align-items: center; /* Alineación vertical para íconos y texto */
         text-decoration: none;
         color: #333;
-        font-size: 1rem;
+        font-size: 1.1rem; /* Aumenta el tamaño de la fuente en móviles */
         padding: 10px;
-        display: block;
         border-radius: 5px;
         transition: background 0.3s;
     }
@@ -74,22 +75,9 @@
         color: #fff;
     }
 
-    .logout {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .logout a {
-        text-decoration: none;
-        color: #fff;
-        background-color: #333;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-size: 1rem;
-        transition: background 0.3s;
-    }
-
-    .logout a:hover {
-        background-color: #555;
+    .menu-icon {
+        width: 18px; /* Ajusta el tamaño de los íconos en móviles */
+        height: 18px;
+        margin-right: 10px;
     }
 }

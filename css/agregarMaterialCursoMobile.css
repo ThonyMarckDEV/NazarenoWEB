@@ -1,0 +1,89 @@
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+    
+        body {
+            background-color: #ffffff;
+            display: flex;
+            height: 100vh;
+            color: #ffffff;
+        }
+    
+        .contenedor-cursos {
+            display: flex;
+            flex-direction: column; /* Coloca los módulos uno encima del otro */
+            gap: 20px; /* Espacio entre los módulos */
+            margin-left: 400px; /* Desplaza el contenedor hacia la derecha */
+            margin-top: 50px;
+            align-items: flex-start; /* Alinea los módulos hacia la izquierda dentro del contenedor */
+        }
+        
+        .curso-modulo {
+            background-color: #fff; /* ondo blanco */
+            border: 2px solid #000; /* Bordes negros */
+            border-radius: 8px; /* Bordes ligeramente redondeados */
+            width: 1000px; /* Ancho del módulo */
+            height: 200px; /* Alto del módulo */
+            display: flex;
+            align-items: center; /* Centra el contenido verticalmente */
+            justify-content: center; /* Centra el contenido horizontalmente */
+            position: relative;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+            cursor: pointer; /* Cambia el cursor a pointer */
+        }
+    
+        .curso-modulo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 40px;
+            height: 10px;
+            background-color: #fff;
+            border-top: 2px solid #000;
+            border-left: 2px solid #000;
+            border-right: 2px solid #000;
+            border-radius: 8px 8px 0 0;
+        }
+    
+        .curso-modulo button {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            color: #333;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    
+        .curso-modulo:hover {
+            background-color: #f0f0f0; /* Efecto hover */
+        }
+    
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50; /* Color verde para éxito */
+            color: white;
+            padding: 16px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 18px;
+        }
+        .notification.show {
+            display: block;
+        }
+}

@@ -50,14 +50,12 @@ $username = $_SESSION['user'];
             <div class="divider"></div>
             <nav class="menu">
                 <ul>
-                    <li><a href="agregar_usuario.php">Agregar Usuarios</a></li>
-                    <li><a href="agregar_especialidad.php">Agregar Especialidad</a></li>
-                    <li><a href="agregar_curso.php">Agregar Cursos</a></li>
-                    <li><a href="asignarEspecialidadDocente.php">Asignar Curso Docente</a></li>
-                    <li><a href="matricularEstudiante.php">Matricular Estudiante</a></li>
+                    <li><a href="agregar_usuario.php"><img src="../img/agregarusuario.png" alt="Perfil" class="menu-icon">Agregar Usuarios</a></li>
+                    <li><a href="agregar_especialidad.php"><img src="../img/addespecialidad.jpg" alt="Perfil" class="menu-icon">Agregar Especialidad</a></li>
+                    <li><a href="agregar_curso.php"><img src="../img/addcurso.jpg" alt="Perfil" class="menu-icon">Agregar Cursos</a></li>
+                    <li><a href="asignarEspecialidadDocente.php"><img src="../img/asignar.png" alt="Perfil" class="menu-icon">Asignar Especialidad Docente</a></li>
+                    <li><a href="matricularEstudiante.php"><img src="../img/matricular.png" alt="Perfil" class="menu-icon">Matricular Estudiante</a></li>
+                    <li><a href="logout.php"><img src="../img/logout.png" alt="Perfil" class="menu-icon">Cerrar Sesion</a></li>
                 </ul>
             </nav>
-            <div class="logout">
-                <a href="logout.php">Cerrar Sesión</a>
-            </div>
 </aside>

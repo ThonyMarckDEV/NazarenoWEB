@@ -8,7 +8,8 @@
     }
     
     body {
-        background-color: #f9f9f9;
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         height: 100vh;
         color: #333;
@@ -25,7 +26,6 @@
     .main-content {
         flex-grow: 1;
         padding: 40px;
-        background-color: #fff;
     }
 
     main h2 {
@@ -129,11 +129,11 @@
 
     /* Estilo para las filas alternas */
     tr:nth-child(even) {
-        background-color: #f9f9f9; /* Color de fondo para las filas alternas */
+  
     }
 
     /* Estilo para las filas al pasar el ratón sobre ellas */
     tr:hover {
-        background-color: #f1f1f1; /* Color de fondo cuando el ratón pasa sobre la fila */
+        
     }
 }

@@ -9,12 +9,12 @@
     }
 
     body {
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
         font-family: 'Arial', sans-serif;
-        background-color: #ffffff; /* Color de fondo suave */
     }
 
     form {
-        margin-top: 20px;
         padding: 10px;
         display: flex;
         flex-direction: column;
@@ -120,7 +120,8 @@
 
     .labelfoto {
         font-size: 18px;
-        text-align: right; /* Alinea la etiqueta a la derecha */
+        color: white;
+        margin-left: 200px;
     }
 
      /* Notificación */

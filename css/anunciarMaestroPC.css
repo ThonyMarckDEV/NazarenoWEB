@@ -11,25 +11,6 @@
         backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         height: 100vh;
-        color: #333;
-    }
-
-    .container {
-        display: flex;
-        width: 100%;
-    }
-
-    /* Sidebar ya está definida en el archivo sidebar.php */
-    
-    /* Main Content Styles */
-    .main-content {
-        flex-grow: 1;
-        padding: 40px;
-    }
-
-    main h2 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
         color: #ffffff;
     }
 
@@ -37,6 +18,8 @@
         width: 450px;
         display: flex;
         flex-direction: column;
+        margin-top: 100px;
+        margin-left: -480px;
     }
 
     form input {
@@ -82,6 +65,44 @@
 
     section {
         margin-bottom: 40px;
+    }
+
+    .anuncio{
+        color: black;
+        margin-top: 50px;
+        margin-left: 500px;
+    }
+
+      /* Estilos para el campo de texto */
+      textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        resize: none;
+    }
+
+    /* Botón de enviar */
+    input[type="submit"] {
+        background-color: #ffffff;
+        color: #000000;
+        border: 2px solid #000000;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Efecto de hover para el botón */
+    input[type="submit"]:hover {
+        background-color: #000000;
+        color: #ffffff;
     }
 
     .notification {

@@ -38,27 +38,19 @@ $username = $_SESSION['user'];
             exit();
     }
 ?> 
- <aside class="sidebar">
-            <div class="logo-section">
-                <a href="UIMaestro.php"><img src="../img/C.E.B.E.LOGO.png" alt="Logo" class="logo-img"></a>
-                <a href="UIMaestro.php"><h2>C.E.B.E</h2></a>
-                <style>
-                    a {
-                        text-decoration: none; /* Elimina el subrayado */
-                    }
-                </style>
-            </div>
-            <div class="divider"></div>
-            <nav class="menu">
-                <ul>
-                    <li><a href="perfilMaestro.php">Perfil</a></li>
-                    <li><a href="anunciar.php">Anunciar</a></li>
-                    <li><a href="tareasPendientes.php">Tareas Pendientes</a></li>
-                    <li><a href="agregarMaterial.php">Agregar Material</a></li>
-                </ul>
-            </nav>
-            <div class="logout">
-                <a href="logout.php">Cerrar Sesión</a>
-            </div>
+<aside class="sidebar">
+    <div class="logo-section">
+        <a href="UIMaestro.php"><img src="../img/C.E.B.E.LOGO.png" alt="Logo" class="logo-img"></a>
+        <a href="UIMaestro.php"><h2>C.E.B.E</h2></a>
+    </div>
+    <div class="divider"></div>
+    <nav class="menu">
+        <ul>
+            <li><a href="perfilMaestro.php"><img src="../img/perfil.png" alt="Perfil" class="menu-icon">Perfil</a></li>
+            <li><a href="anunciar.php"><img src="../img/anunciar.png" alt="Anunciar" class="menu-icon">Anunciar</a></li>
+            <li><a href="tareasPendientes.php"><img src="../img/tareas.png" alt="Tareas Pendientes" class="menu-icon">Tareas Pendientes</a></li>
+            <li><a href="agregarMaterial.php"><img src="../img/material.png" alt="Agregar Material" class="menu-icon">Agregar Material</a></li>
+            <li><a href="logout.php"><img src="../img/logout.png" alt="Cerrar Sesión" class="menu-icon">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
 </aside>
-

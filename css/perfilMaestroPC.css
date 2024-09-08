@@ -1,7 +1,7 @@
 /* ==========================================*/
 /* PC */
 @media (min-width: 991px) {
-    /* Reset de márgenes y paddings para asegurar consistencia */
+ /* Reset de márgenes y paddings para asegurar consistencia */
     * {
         margin: 0;
         padding: 0;
@@ -42,13 +42,13 @@
         margin-bottom: 10px;
     }
     .profile-pic {
-        width: 250px; /* Fija el ancho de la imagen */
-        height: 250px; /* Fija la altura de la imagen */
+        width: 200px; /* Fija el ancho de la imagen */
+        height: 200px; /* Fija la altura de la imagen */
         object-fit: cover; /* Asegura que la imagen se ajuste dentro del cuadro manteniendo el aspecto */
         border-radius: 50%; /* Hace la imagen circular si es necesario */
         display: block;
         margin: 0 auto; /* Centra la imagen */
-        margin-left: 10px;
+        margin-left: -20px;
     }
     .perfil-datos label {
         color: #4e5d6c;
@@ -121,6 +121,4 @@
     .notification.show {
         display: block;
     }
-
 }
-

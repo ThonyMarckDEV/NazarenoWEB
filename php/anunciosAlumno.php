@@ -78,8 +78,8 @@ if (!$resultCursos) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anunciar - C.E.B.E</title>
-    <link rel="stylesheet" href="../css/anunciarPC.css">
-    <link rel="stylesheet" href="../css/anunciarMobile.css">
+    <link rel="stylesheet" href="../css/anunciosAlumnoPC.css">
+    <link rel="stylesheet" href="../css/anunciosAlumnoMobile.css">
     <!-- Sidebar CSS -->
     <link rel="stylesheet" href="../css/sidebarALUMNOPC.css">
     <link rel="stylesheet" href="../css/sidebarALUMNOMobile.css">

@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <section>
                 <h2>Asignar Especialidad a Docente</h2>
                 <form action="asignarEspecialidadDocente.php" method="POST">
-                    <label for="especialidad">Especialidad:</label>
+                    <label for="especialidad" style="color:white">Especialidad:</label>
                     <select name="especialidad" id="especialidad" required>
                         <option value="">Seleccione una especialidad</option>
                         <?php
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         ?>
                     </select>
 
-                    <label for="docente">Docente:</label>
+                    <label for="docente" style="color:white">Docente:</label>
                     <select name="docente" id="docente" required>
                         <option value="">Seleccione un docente</option>
                         <?php
@@ -132,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
 
                     <div id="asignacion">
-                        <p>Especialidad Seleccionada: <span id="especialidadSeleccionada"></span></p>
-                        <p>Docente Seleccionado: <span id="docenteSeleccionado"></span></p>
+                        <p>Especialidad Seleccionada: <span id="especialidadSeleccionada" style="color:white"></span></p>
+                        <p>Docente Seleccionado: <span id="docenteSeleccionado" style="color:white"></span></p>
                         <button type="submit">Asignar</button>
                     </div>
                 </form>

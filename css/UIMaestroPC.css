@@ -10,10 +10,11 @@
     }
 
     body {
-        background-color: #f9f9f9;
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         height: 100vh;
-        color: #333;
+        color: #ffffff;
     }
 
     .container {
@@ -25,18 +26,18 @@
     .main-content {
         flex-grow: 1;
         padding: 40px;
-        background-color: #fff;
     }
 
     main h2 {
         font-size: 1.5rem;
         margin-bottom: 20px;
-        color: #333;
+        color: #ffffff;
     }
 
     main p {
         font-size: 1rem;
         margin-bottom: 20px;
     }
+
 
 }

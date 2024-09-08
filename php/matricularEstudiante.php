@@ -149,9 +149,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
         <!-- Main Content -->
         <main class="main-content">
             <section>
-                <h2>Matricular Estudiante en Curso</h2>
+                <h2 style="color: white;">Matricular Estudiante en Curso</h2>
                 <form action="matricularEstudiante.php" method="POST">
-                    <label for="estudiante">Estudiante:</label>
+                    <label for="estudiante" style="color: white;">Estudiante:</label>
                     <select name="estudiante" id="estudiante" required>
                         <option value="">Seleccione un estudiante</option>
                         <?php
@@ -165,7 +165,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
                         ?>
                     </select>
 
-                    <label for="curso">Curso:</label>
+                    <label for="curso" style="color: white;">Curso:</label>
                     <select name="curso" id="curso" required>
                         <option value="">Seleccione un curso</option>
                         <?php
@@ -183,13 +183,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
                     </select>
 
                     <div id="matriculacion">
-                        <p>Estudiante Seleccionado: <span id="estudianteSeleccionado"></span></p>
-                        <p>Curso Seleccionado: <span id="cursoSeleccionado"></span></p>
+                        <p>Estudiante Seleccionado: <span id="estudianteSeleccionado" style="color: white;"></span></p>
+                        <p>Curso Seleccionado: <span id="cursoSeleccionado" style="color: white;"></span></p>
                         <button type="submit">Matricular</button>
                     </div>
                 </form>
                         <br>
-                <h2>Matriculas Actuales</h2>
+                <h2 style="color: white;">Matriculas Actuales</h2>
                 <table>
                     <thead>
                         <tr>
@@ -209,8 +209,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
 
                         while ($row = $result->fetch_assoc()) {
                             echo '<tr>';
-                            echo '<td>' . $row['nombreEstudiante'] . '</td>';
-                            echo '<td>' . $row['nombreCurso'] . '</td>';
+                            echo '<td style="color: white;">' . $row['nombreEstudiante'] . '</td>';
+                            echo '<td style="color: white;">' . $row['nombreCurso'] . '</td>';
                             echo '<td><a href="matricularEstudiante.php?action=eliminar&id=' . $row['idMatricula'] . '">Eliminar</a></td>';
                             echo '</tr>';
                         }

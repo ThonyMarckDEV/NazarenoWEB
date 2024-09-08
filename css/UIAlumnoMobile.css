@@ -10,7 +10,8 @@
     }
 
     body {
-        background-color: #f9f9f9;
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
         color: #333;
         display: flex;
         flex-direction: column;
@@ -28,7 +29,6 @@
     .main-content {
         margin-left: 39%; /* Ajusta el margen izquierdo para compensar el ancho de la barra lateral */
         padding: 20px;
-        background-color: #fff;
         overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado largo */
         width: 61%; /* Ajusta el ancho del contenido principal */
         transition: margin-left 0.3s ease; /* Transición suave cuando la barra lateral se despliega */
@@ -37,7 +37,7 @@
     main h2 {
         font-size: 1.2rem;
         margin-bottom: 15px;
-        color: #333;
+        color: #ffffff;
     }
 
     main p {

@@ -63,7 +63,7 @@
             $resultUsuario = mysqli_query($conn, $queryUsuario);
             $idUsuario = mysqli_fetch_assoc($resultUsuario)['idUsuario'];
 
-            // Obtener los cursos asignados al docente (idDocente = idUsuario) de la tabla especialidad_docente
+            // Obtener los modulos asignados al curso (idDocente = idUsuario) de la tabla especialidad_docente
             $queryCursos = "
                 SELECT cursos.nombreCurso 
                 FROM especialidaddocente 
@@ -72,11 +72,13 @@
             ";
             $resultCursos = mysqli_query($conn, $queryCursos);
             ?>
-
-            <div class="contenedor-cursos">
+        <div class="contenedor-cursos">
                 <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
                     <div class="curso-modulo">
-                        <button><?php echo $curso['nombreCurso']; ?></button>
+                        <form action="agregarMaterialCurso.php" method="POST">
+                            <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
+                            <button type="submit" name="submit"><?php echo htmlspecialchars($curso['nombreCurso']); ?></button>
+                        </form>
                     </div>
                 <?php } ?>
             </div>

@@ -54,10 +54,10 @@ switch ($user_role) {
     <div class="notification" id="notification"></div> <!-- Contenedor de la notificación -->
      <!-- Incluir la Sidebar -->
     <?php include 'sidebarALUMNO.php';?> 
+    <h1 for="foto" class="labelfoto">Foto de perfil</h1><br>
     <form id="perfilForm" method="POST" class="frmMain" action="procesarPerfilAlumno.php" enctype="multipart/form-data">
         <div class="perfil-info">
             <div class="perfil-foto">
-                <label for="foto" class="labelfoto">Foto de perfil:</label><br>
                 <?php
                     // Mostrar la foto de perfil si está disponible
                     $sql_foto_perfil = "SELECT perfil FROM usuarios WHERE username = ?";
@@ -99,12 +99,12 @@ switch ($user_role) {
 
                         // Mostrar campos que no se pueden editar
                         foreach (['nombres', 'apellidos', 'edad', 'dni'] as $campo) {
-                            echo "<label for='$campo'>$campo:</label><br>";
+                            echo "<label  style='color:white;' for='$campo'>$campo:</label><br>";
                             echo "<input type='text' id='$campo' name='$campo' value='{$datos_usuario[$campo]}' readonly><br>";
                         }
 
                         foreach (['correo', 'nacimiento', 'sexo', 'direccion', 'telefono', 'departamento'] as $campo) {
-                            echo "<label for='$campo'>$campo:</label><br>";
+                            echo "<label style='color:white;' for='$campo'>$campo:</label><br>";
                         
                             if ($campo == 'nacimiento') {
                                 // Si el campo es 'nacimiento', usar el input tipo 'date'

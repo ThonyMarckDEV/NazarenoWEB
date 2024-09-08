@@ -10,9 +10,6 @@
         exit();
     }
 
-    // Incluir la conexión a la base de datos
-    include 'conexion.php'; // Asegúrate de que la ruta es correcta
-
     // Obtener el nombre de usuario de la sesión
     $username = $_SESSION['user'];
 
@@ -114,7 +111,7 @@
                 <form action="agregar_curso.php" method="POST">
                     <input type="text" name="nombreCurso" placeholder="Nombre del curso" required>
 
-                    <label for="idEspecialidad">Especialidad:</label>
+                    <label for="idEspecialidad" style="color:white">Especialidad:</label>
                     <select name="idEspecialidad" id="idEspecialidad" required>
                         <?php
                         // Obtener especialidades para llenar el combo box

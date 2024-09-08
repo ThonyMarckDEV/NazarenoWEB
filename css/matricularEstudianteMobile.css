@@ -9,7 +9,8 @@
     }
     
     body {
-        background-color: #f9f9f9;
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         height: 100vh;
         color: #333;
@@ -27,7 +28,6 @@
     .main-content {
         margin-left: 39%; /* Ajusta el margen izquierdo para que el contenido esté a la derecha de la barra lateral */
         padding: 40px;
-        background-color: #fff;
         width: 61%; /* Ajusta el ancho del contenido principal para que ocupe el espacio restante */
         overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado largo */
         transition: margin-left 0.3s ease; /* Transición suave para el margen izquierdo */
@@ -121,7 +121,6 @@
 
     /* Estilo para las cabeceras de la tabla */
     th {
-        background-color: #f4f4f4; /* Color de fondo para las cabeceras */
         color: #333; /* Color del texto */
         padding: 10px; /* Espacio interno en las celdas de cabecera */
         border-bottom: 2px solid #ddd; /* Línea debajo de las cabeceras */
@@ -135,11 +134,11 @@
 
     /* Estilo para las filas alternas */
     tr:nth-child(even) {
-        background-color: #f9f9f9; /* Color de fondo para las filas alternas */
+
     }
 
     /* Estilo para las filas al pasar el ratón sobre ellas */
     tr:hover {
-        background-color: #f1f1f1; /* Color de fondo cuando el ratón pasa sobre la fila */
+
     }
 }
