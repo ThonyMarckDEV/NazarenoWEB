@@ -27,7 +27,6 @@
 
     /* Main Content Styles */
     .main-content {
-        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
         margin-left: 39%; /* Ajusta el margen izquierdo para compensar el ancho de la barra lateral */
         padding: 20px;
         overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado largo */

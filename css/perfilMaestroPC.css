@@ -10,7 +10,8 @@
 
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #ffffff; /* Color de fondo suave */
+        background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
     }
 
     form {
