@@ -43,16 +43,16 @@ if ($result->num_rows > 0) {
             // Redirigir según el rol del usuario
             switch ($rol) {
                 case 'ADMIN':
-                    header("Location: UIAdmin.php");
+                    header("Location: ADMINPHP/UIAdmin.php");
                     break;
                 case 'ESTUDIANTE':
-                    header("Location: UIAlumno.php");
+                    header("Location: ALUMNOPHP/UIAlumno.php");
                     break;
                 case 'DOCENTE':
-                    header("Location: UIMaestro.php");
+                    header("Location: DOCENTEPHP/UIMaestro.php");
                     break;
                 case 'APODERADO':
-                    header("Location: UIApoderado.php");
+                    header("Location: APODERADOPHP/UIApoderado.php");
                     break;
                 default:
                     header("Location: index.php?status=error");
