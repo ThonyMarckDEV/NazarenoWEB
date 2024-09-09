@@ -57,7 +57,7 @@
 
     form button {
         padding: 10px;
-        background-color: #333;
+        background-color: #000000;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -80,7 +80,7 @@
         position: fixed;
         top: 20px;
         right: 10px; /* Mueve la notificación al lado derecho */
-        background-color: #4CAF50; /* Color verde para éxito */
+        background-color: #000000; /* Color verde para éxito */
         color: white;
         padding: 16px;
         border-radius: 5px;

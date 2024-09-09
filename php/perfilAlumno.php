@@ -54,7 +54,6 @@ switch ($user_role) {
     <div class="notification" id="notification"></div> <!-- Contenedor de la notificación -->
      <!-- Incluir la Sidebar -->
     <?php include 'sidebarALUMNO.php';?> 
-    <h1 for="foto" class="labelfoto">Foto de perfil</h1><br>
     <form id="perfilForm" method="POST" class="frmMain" action="procesarPerfilAlumno.php" enctype="multipart/form-data">
         <div class="perfil-info">
             <div class="perfil-foto">

@@ -1,7 +1,7 @@
 /* ==========================================*/
 /* PC */
 @media (min-width: 991px) {
- /* Reset de márgenes y paddings para asegurar consistencia */
+    /* Reset de márgenes y paddings para asegurar consistencia */
     * {
         margin: 0;
         padding: 0;
@@ -9,9 +9,9 @@
     }
 
     body {
-        font-family: 'Arial', sans-serif;
         background-image: url('../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
         backdrop-filter: blur(5px); /* Difumina el fondo */
+        font-family: 'Arial', sans-serif;
     }
 
     form {
@@ -49,7 +49,7 @@
         border-radius: 50%; /* Hace la imagen circular si es necesario */
         display: block;
         margin: 0 auto; /* Centra la imagen */
-        margin-left: -20px;
+        margin-left: -10px;
     }
     .perfil-datos label {
         color: #4e5d6c;
@@ -122,4 +122,6 @@
     .notification.show {
         display: block;
     }
+
 }
+

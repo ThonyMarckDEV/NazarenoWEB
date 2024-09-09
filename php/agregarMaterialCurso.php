@@ -53,7 +53,7 @@ if (isset($_POST['nombreCurso'])) {
 
     // Obtener los módulos asignados al curso
     $queryModulos = "
-        SELECT modulos.nombre
+        SELECT modulos.nombre,modulos.idModulo
         FROM modulos 
         WHERE modulos.idCurso = ?
     ";
@@ -77,16 +77,18 @@ if (isset($_POST['nombreCurso'])) {
     <link rel="stylesheet" href="../css/sidebarMAESTROMobile.css">
 </head>
 <body>
-    <!-- Incluir la Sidebar -->
+        <!-- Incluir la Sidebar -->
     <?php include 'sidebarMAESTRO.php'; ?>
-    
     <div class="contenedor-cursos">
         <?php if (isset($resultModulos)): ?>
             <?php while ($modulo = $resultModulos->fetch_assoc()) { ?>
                 <div class="curso-modulo">
                     <form action="agregarMaterialModulo.php" method="POST">
-                        <input type="hidden" name="nombreModulo" value="<?php echo htmlspecialchars($modulo['nombre']); ?>">
-                        <button type="submit" name="submit"><?php echo htmlspecialchars($modulo['nombre'] . ' (' . $nombreCurso . ')'); ?></button>
+                        <!-- Enviar el id del módulo -->
+                        <input type="hidden" name="idModulo" value="<?php echo htmlspecialchars($modulo['idModulo']); ?>">
+                        <button type="submit" name="submit">
+                            <?php echo htmlspecialchars($modulo['nombre'] . ' (' . $nombreCurso . ')'); ?>
+                        </button>
                     </form>
                 </div>
             <?php } ?>
