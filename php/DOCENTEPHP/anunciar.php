@@ -88,9 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $queryCursos = "
         SELECT cursos.nombreCurso 
-        FROM especialidaddocente 
-        JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idCurso 
-        WHERE especialidaddocente.idDocente = '$idUsuario'
+                    FROM especialidaddocente 
+                    JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idEspecialidad
+                    WHERE especialidaddocente.idDocente = '$idUsuario'
     ";
     $resultCursos = mysqli_query($conn, $queryCursos);
     ?>

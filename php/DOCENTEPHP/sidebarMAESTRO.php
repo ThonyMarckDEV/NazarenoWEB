@@ -54,3 +54,27 @@ $username = $_SESSION['user'];
         </ul>
     </nav>
 </aside>
+<script>
+        // Función para verificar el estado de la sesión del usuario
+        function verificarEstadoUsuario() {
+            fetch('../verificar_estado.php', { // Ajusta la ruta según la ubicación de verificar_estado.php
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                cache: 'no-cache'  // Evitar caché en solicitudes
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "loggedOff") {
+                    // Redirigir al index si está deslogueado
+                    window.location.href = '../../index.php';
+                }
+            })
+            .catch(error => console.error('Error al verificar el estado del usuario:', error));
+        }
+
+        // Ejecutar la verificación cada 3 segundos
+        setInterval(verificarEstadoUsuario, 3000);
+
+        // Ejecutar la verificación al cargar la página
+        verificarEstadoUsuario();
+    </script>

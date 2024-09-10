@@ -91,7 +91,7 @@ if (isset($_POST['subirMaterial'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Actividad y Material - C.E.B.E</title>
     <link rel="stylesheet" href="../../css/DOCENTECSS/agregarMaterialModuloPC.css">
-    <link rel="stylesheet" href="../../css/ADMINCSS/agregar_usuarioMobile.css">
+    <link rel="stylesheet" href="../../css/DOCENTECSS/agregarMaterialModuloMobile.css">
     <!-- Sidebar CSS -->
     <link rel="stylesheet" href="../../css/DOCENTECSS/sidebarMAESTROPC.css">
     <link rel="stylesheet" href="../../css/DOCENTECSS/sidebarMAESTROMobile.css">

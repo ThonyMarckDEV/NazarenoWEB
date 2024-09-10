@@ -3,7 +3,7 @@
 
     // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['user'])) {
-        header("Location: ../index.php"); // Redirige al inicio de sesión si no hay sesión iniciada
+        header("Location: ../../index.php"); // Redirige al inicio de sesión si no hay sesión iniciada
         exit();
     }
 
@@ -12,6 +12,20 @@
 
     // Obtener el nombre de usuario de la sesión
     $username = $_SESSION['user'];
+
+        // Consulta para obtener el idUsuario y verificar el estado del usuario
+    $sql = "SELECT idUsuario, status FROM usuarios WHERE username = '$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Obtener el resultado de la consulta
+        $row = $result->fetch_assoc();
+        
+        if ($row['status'] == 'loggedOff') {
+            header("Location: ../../index.php"); // Redirige al inicio de sesión si no hay sesión iniciada
+        exit();
+        }
+    }
 
     // Preparar y ejecutar la consulta para obtener el rol del usuario
     $stmt = $conn->prepare("SELECT rol FROM usuarios WHERE username = ?");

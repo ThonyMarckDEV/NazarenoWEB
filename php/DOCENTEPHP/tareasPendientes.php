@@ -66,9 +66,9 @@
             // Obtener los cursos asignados al docente (idDocente = idUsuario) de la tabla especialidad_docente
             $queryCursos = "
                 SELECT cursos.nombreCurso 
-                FROM especialidaddocente 
-                JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idCurso 
-                WHERE especialidaddocente.idDocente = '$idUsuario'
+                    FROM especialidaddocente 
+                    JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idEspecialidad
+                    WHERE especialidaddocente.idDocente = '$idUsuario'
             ";
             $resultCursos = mysqli_query($conn, $queryCursos);
             ?>

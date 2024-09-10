@@ -1,4 +1,6 @@
-@media (min-width: 767px) {
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
     * {
         margin: 0;
         padding: 0;
@@ -37,9 +39,21 @@
     }
 
     form {
+        margin-left: 170px;
+        width: 180px;
         backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         flex-direction: column;
+    }
+
+    .material{
+        margin-left: 180px;
+        margin-top: 10px;
+    }
+
+    .actividad{
+        margin-left: 180px;
+        margin-top: 10px;
     }
 
     form input {
