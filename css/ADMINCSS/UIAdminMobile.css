@@ -1,0 +1,49 @@
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden; /* Evitar desplazamiento horizontal */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row; /* Cambiado a row para alinear la barra lateral y el contenido principal en una fila */
+        width: 100%;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+        margin-left: 39%; /* Ajusta el margen izquierdo para compensar el ancho de la barra lateral */
+        padding: 20px;
+        overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado largo */
+        width: 61%; /* Ajusta el ancho del contenido principal */
+        transition: margin-left 0.3s ease; /* Transición suave cuando la barra lateral se despliega */
+    }
+
+    main h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+    main p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+}
