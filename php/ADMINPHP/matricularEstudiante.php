@@ -168,15 +168,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
                     <select name="curso" id="curso" required>
                         <option value="">Seleccione un curso</option>
                         <?php
-                        // Obtener la lista de cursos con los cupos disponibles
-                        $sql = "SELECT idCurso, nombreCurso, cupos FROM cursos";
+                        // Obtener la lista de cursos
+                        $sql = "SELECT idCurso, nombreCurso FROM cursos";
                         $result = $conn->query($sql);
                         
                         while ($row = $result->fetch_assoc()) {
                             $idCurso = $row['idCurso'];
                             $nombreCurso = $row['nombreCurso'];
-                            $cupos = $row['cupos'];
-                            echo '<option value="' . $idCurso . '">' . $nombreCurso . ' (Cupos: ' . $cupos . ')</option>';
+                            echo '<option value="' . $idCurso . '">' . $nombreCurso . '</option>';
                         }
                         ?>
                     </select>
@@ -187,9 +186,31 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
                         <button type="submit">Matricular</button>
                     </div>
                 </form>
-                        <br>
-                <h2 style="color: white;">Matriculas Actuales</h2>
-                <table>
+                <br>
+                <h2 style="color: white;" class="ma">Matriculas Actuales</h2>
+                
+                <!-- Añadir el combobox para seleccionar curso -->
+                <label for="filtroCurso" style="color: white;">Filtrar por Curso:</label>
+                <select id="filtroCurso" class="cbxFiltra">
+                    <option value="">Seleccione un curso</option>
+                    <?php
+                    // Obtener la lista de cursos para el combobox de filtrado
+                    $sql = "SELECT idCurso, nombreCurso FROM cursos";
+                    $result = $conn->query($sql);
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        $idCurso = $row['idCurso'];
+                        $nombreCurso = $row['nombreCurso'];
+                        echo '<option value="' . $idCurso . '">' . $nombreCurso . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <!-- Añadir campo de entrada para el filtro por texto -->
+                <label for="filtroTexto" style="color: white;">Filtrar por Texto:</label>
+                <input type="text" id="filtroTexto" placeholder="Buscar estudiante o curso" class="inputFiltrar">
+
+                <table id="matriculasTabla">
                     <thead>
                         <tr>
                             <th>Estudiante</th>
@@ -200,14 +221,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
                     <tbody>
                         <?php
                         // Obtener la lista de matrículas
-                        $sql = "SELECT a.idMatricula, CONCAT(u.nombres, ' ', u.apellidos) AS nombreEstudiante, c.nombreCurso 
+                        $sql = "SELECT a.idMatricula, CONCAT(u.nombres, ' ', u.apellidos) AS nombreEstudiante, c.idCurso, c.nombreCurso 
                                 FROM alumnosmatriculados a 
                                 JOIN usuarios u ON a.idUsuario = u.idUsuario 
                                 JOIN cursos c ON a.idCurso = c.idCurso";
                         $result = $conn->query($sql);
 
                         while ($row = $result->fetch_assoc()) {
-                            echo '<tr>';
+                            echo '<tr data-curso-id="' . $row['idCurso'] . '" data-nombre-estudiante="' . $row['nombreEstudiante'] . '" data-nombre-curso="' . $row['nombreCurso'] . '">';
                             echo '<td style="color: white;">' . $row['nombreEstudiante'] . '</td>';
                             echo '<td style="color: white;">' . $row['nombreCurso'] . '</td>';
                             echo '<td><a href="matricularEstudiante.php?action=eliminar&id=' . $row['idMatricula'] . '">Eliminar</a></td>';
@@ -250,6 +271,38 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
             document.getElementById('curso').addEventListener('change', function() {
                 var curso = this.options[this.selectedIndex].text;
                 document.getElementById('cursoSeleccionado').innerText = curso;
+            });
+
+            // Filtrar la tabla por curso seleccionado
+            document.getElementById('filtroCurso').addEventListener('change', function() {
+                var cursoId = this.value;
+                var rows = document.querySelectorAll('#matriculasTabla tbody tr');
+
+                rows.forEach(function(row) {
+                    var rowCursoId = row.getAttribute('data-curso-id');
+                    if (cursoId === "" || rowCursoId === cursoId) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+
+            // Filtrar la tabla por texto
+            document.getElementById('filtroTexto').addEventListener('input', function() {
+                var texto = this.value.toLowerCase();
+                var rows = document.querySelectorAll('#matriculasTabla tbody tr');
+
+                rows.forEach(function(row) {
+                    var nombreEstudiante = row.getAttribute('data-nombre-estudiante').toLowerCase();
+                    var nombreCurso = row.getAttribute('data-nombre-curso').toLowerCase();
+
+                    if (nombreEstudiante.includes(texto) || nombreCurso.includes(texto)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
             });
         };
     </script>

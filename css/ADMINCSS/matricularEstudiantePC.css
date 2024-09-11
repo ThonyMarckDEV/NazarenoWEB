@@ -15,6 +15,15 @@
         color: #333;
     }
 
+    .inputFiltrar{
+        height: 50px;
+        width: 200px;
+    }
+
+    .cbxFiltra{
+        height: 50px;
+    }
+
     .container {
         display: flex;
         width: 100%;

@@ -47,6 +47,7 @@
     .menu {
         flex-grow: 1;
         margin-top: 10px;
+        margin-left: -10px;
     }
 
     .menu ul {

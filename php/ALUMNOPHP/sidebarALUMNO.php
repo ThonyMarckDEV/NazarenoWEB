@@ -52,10 +52,10 @@ $username = $_SESSION['user'];
             <nav class="menu">
                 <ul>
                     <li><a href="perfilAlumno.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Perfil</a></li>
-                    <li><a href="anunciosAlumno.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Anuncios</a></li>
-                    <li><a href="cursosAlumno.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Cursos</a></li>
-                    <li><a href="calificacionesAlumno.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Calificaciones</a></li>
-                    <li><a href="../logout.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Cerrar Sesion</a></li>
+                    <li><a href="anunciosAlumno.php"><img src="../../img/anunciar.png" alt="Perfil" class="menu-icon">Anuncios</a></li>
+                    <li><a href="cursosAlumno.php"><img src="../../img/cursos.png" alt="Perfil" class="menu-icon">Cursos</a></li>
+                    <li><a href="calificacionesAlumno.php"><img src="../../img/calificaciones.png" alt="Perfil" class="menu-icon">Calificaciones</a></li>
+                    <li><a href="../logout.php"><img src="../../img/logout.png" alt="Perfil" class="menu-icon">Cerrar Sesion</a></li>
                 </ul>
             </nav>
 </aside>

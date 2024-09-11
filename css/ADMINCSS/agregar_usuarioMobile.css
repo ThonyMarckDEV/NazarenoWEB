@@ -17,6 +17,10 @@
         overflow-x: hidden; /* Evita desplazamiento horizontal */
     }
 
+    .cbxROL{
+        height: 40px;
+    }
+
     .container {
         display: flex;
         width: 100%;
@@ -34,6 +38,8 @@
 
     main h2 {
         font-size: 1.5rem;
+        margin-top: -30px;
+        margin-left: -20px;
         margin-bottom: 20px;
         color: #ffffff;
     }
@@ -42,6 +48,8 @@
         backdrop-filter: blur(5px); /* Difumina el fondo */
         display: flex;
         flex-direction: column;
+        width: 200px;
+        margin-left: -20px;
     }
 
     form input {

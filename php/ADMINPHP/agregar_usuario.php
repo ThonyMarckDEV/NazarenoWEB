@@ -128,8 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="agregar_usuario.php" method="POST" enctype="multipart/form-data">
                     <!-- Contenedor de input para rol y select -->
                     <div class="role-container">
-                        <input type="text" id="rolInput" name="rol" placeholder="Seleccionar rol" readonly required>
-                        <select id="roleSelect">
+                        <select id="roleSelect" class="cbxROL">
                             <option value="">Seleccionar</option>
                             <option value="ADMIN">ADMIN</option>
                             <option value="ESTUDIANTE">ESTUDIANTE</option>
@@ -137,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="APODERADO">APODERADO</option>
                         </select>
                     </div>
-                    
+                    <input type="text" id="rolInput" name="rol" placeholder="Seleccionar rol" readonly required>
                     <!-- Resto del formulario -->
                     <input type="text" name="username" placeholder="Nombre de usuario" required>
                     <input type="text" name="nombres" placeholder="Nombres" required>
@@ -145,15 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="dni" placeholder="DNI" required>
                     <input type="email" name="correo" placeholder="Correo electrónico (OPCIONAL)">
                     <input type="number" name="edad" placeholder="Edad">
+                    <label for="perfil" style="color:white;">F. NACIMIENTO:</label>  
                     <input type="date" name="nacimiento" placeholder="Fecha de nacimiento (OPCIONAL)">
                     <input type="text" name="sexo" placeholder="Sexo (OPCIONAL)">
                     <input type="text" name="direccion" placeholder="Dirección (OPCIONAL)">
                     <input type="text" name="telefono" placeholder="Teléfono (OPCIONAL)">
                     <input type="text" name="departamento" placeholder="Departamento (OPCIONAL)">
-                    <input type="password" name="password" placeholder="Contraseña" required>
-                    <label for="perfil">Foto de perfil:</label>
-                    <input type="file" name="perfil" accept="image/*">
-                    
+                    <input type="password" name="password" placeholder="Contraseña" required>                  
                     <button type="submit">Agregar Usuario</button>
                 </form>
             </section>

@@ -110,7 +110,7 @@ switch ($user_role) {
                                 echo "<input type='date' id='$campo' name='$campo' value='{$datos_usuario[$campo]}' disabled>";
                             } elseif ($campo == 'sexo') {
                                 // Si el campo es 'sexo', usar un combobox con opciones
-                                echo "<select id='$campo' name='$campo' disabled>";
+                                echo "<select id='$campo' name='$campo' disabled class='cbxSexo'>";
                                 echo "<option value='Masculino'" . ($datos_usuario[$campo] == 'Masculino' ? " selected" : "") . ">Masculino</option>";
                                 echo "<option value='Femenino'" . ($datos_usuario[$campo] == 'Femenino' ? " selected" : "") . ">Femenino</option>";
                                 echo "</select>";
@@ -120,7 +120,7 @@ switch ($user_role) {
                                 // Si el campo es 'departamento', usar un combobox con todos los departamentos de Perú
                                 $departamentos = ['Amazonas', 'Áncash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca', 'Callao', 'Cusco', 'Huancavelica', 'Huánuco', 'Ica', 'Junín', 'La Libertad', 'Lambayeque', 'Lima', 'Loreto', 'Madre de Dios', 'Moquegua', 'Pasco', 'Piura', 'Puno', 'San Martín', 'Tacna', 'Tumbes', 'Ucayali'];
                         
-                                echo "<select id='$campo' name='$campo' disabled>";
+                                echo "<select id='$campo' name='$campo' disabled class='departamento'>";
                                 foreach ($departamentos as $dep) {
                                     echo "<option value='$dep'" . ($datos_usuario[$campo] == $dep ? " selected" : "") . ">$dep</option>";
                                 }
