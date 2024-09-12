@@ -41,7 +41,7 @@ $username = $_SESSION['user'];
 <aside class="sidebar">
     <div class="logo-section">
         <a href="UIMaestro.php"><img src="../../img/C.E.B.E.LOGO.png" alt="Logo" class="logo-img"></a>
-        <a href="UIMaestro.php"><h2>C.E.B.E</h2></a>
+        <a href="UIMaestro.php" style="text-decoration: none"><h2>C.E.B.E</h2></a>
     </div>
     <div class="divider"></div>
     <nav class="menu">
