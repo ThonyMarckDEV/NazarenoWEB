@@ -44,6 +44,10 @@
         margin-bottom: 15px;
     }
 
+    .a{
+        text-decoration: none;
+    }
+
     .menu {
         flex-grow: 1;
         margin-top: 10px;

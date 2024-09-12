@@ -49,7 +49,11 @@
         margin-top: 10px;
         margin-left: -10px;
     }
-
+    
+    .a{
+        text-decoration: none;
+    }
+    
     .menu ul {
         list-style: none;
         padding: 0;

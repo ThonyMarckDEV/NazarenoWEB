@@ -17,7 +17,11 @@
         height: 100%;
         z-index: 1000;
     }
-
+    
+    .a{
+        text-decoration: none;
+    }
+    
     .logo-section {
         display: flex;
         align-items: center;
