@@ -63,25 +63,27 @@
                 $resultUsuario = mysqli_query($conn, $queryUsuario);
                 $idUsuario = mysqli_fetch_assoc($resultUsuario)['idUsuario'];
 
-                // Obtener los modulos asignados al curso (idDocente = idUsuario) de la tabla especialidad_docente
                 $queryCursos = "
-                    SELECT cursos.nombreCurso 
-                    FROM especialidaddocente 
-                    JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idEspecialidad
-                    WHERE especialidaddocente.idDocente = '$idUsuario'
-                ";
-                $resultCursos = mysqli_query($conn, $queryCursos);
-                ?>
+                SELECT cursos.nombreCurso, grados.seccion
+                FROM cursos
+                JOIN grados ON cursos.idGrado = grados.idGrado
+                JOIN especialidaddocente ON cursos.idEspecialidad = especialidaddocente.idEspecialidad
+                WHERE especialidaddocente.idDocente = '$idUsuario'
+            ";
+            $resultCursos = mysqli_query($conn, $queryCursos);
+            ?>
             <div class="contenedor-cursos">
-                    <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
-                        <div class="curso-modulo">
-                            <form action="agregarMaterialCurso.php" method="POST">
-                                <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
-                                <button type="submit" name="submit"><?php echo htmlspecialchars($curso['nombreCurso']); ?></button>
-                            </form>
-                        </div>
-                    <?php } ?>
-                </div>
+                <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
+                    <div class="curso-modulo">
+                        <form action="agregarMaterialCurso.php" method="POST">
+                            <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
+                            <button type="submit" name="submit">
+                                <?php echo htmlspecialchars($curso['nombreCurso']); ?> - <?php echo htmlspecialchars($curso['seccion']); ?>
+                            </button>
+                        </form>
+                    </div>
+                <?php } ?>
+            </div>
     </body>
     </html>
 

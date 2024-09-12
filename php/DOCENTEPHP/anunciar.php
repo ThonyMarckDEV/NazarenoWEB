@@ -39,20 +39,21 @@ switch ($user_role) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['nombreCurso']) && isset($_POST['descripcion'])) {
+    if (isset($_POST['nombreCurso']) && isset($_POST['descripcion']) && isset($_POST['seccion'])) {
         $nombreCurso = $_POST['nombreCurso'];
         $descripcion = $_POST['descripcion'];
+        $seccion = $_POST['seccion'];
         $fecha = date('Y-m-d');
         $hora = date('H:i:s');
 
-        $stmt = $conn->prepare("INSERT INTO anunciosMaestro (nombreCurso, descripcion, fecha, hora) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO anunciosMaestro (nombreCurso, descripcion, seccion, fecha, hora) VALUES (?, ?, ?, ?, ?)");
         if ($stmt === false) {
             $errorMsg = urlencode("Error en la preparación de la consulta: " . $conn->error);
             header("Location: anunciarMaestro.php?status=error&message=$errorMsg");
             exit();
         }
 
-        $stmt->bind_param("ssss", $nombreCurso, $descripcion, $fecha, $hora);
+        $stmt->bind_param("sssss", $nombreCurso, $descripcion, $seccion, $fecha, $hora);
         if ($stmt->execute()) {
             header("Location: anunciarMaestro.php?status=success");
         } else {
@@ -87,10 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idUsuario = mysqli_fetch_assoc($resultUsuario)['idUsuario'];
 
     $queryCursos = "
-        SELECT cursos.nombreCurso 
-                    FROM especialidaddocente 
-                    JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idEspecialidad
-                    WHERE especialidaddocente.idDocente = '$idUsuario'
+    SELECT cursos.nombreCurso, grados.seccion
+    FROM cursos
+    JOIN grados ON cursos.idGrado = grados.idGrado
+    JOIN especialidaddocente ON cursos.idEspecialidad = especialidaddocente.idEspecialidad
+    WHERE especialidaddocente.idDocente = '$idUsuario'
     ";
     $resultCursos = mysqli_query($conn, $queryCursos);
     ?>
@@ -99,7 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="curso-modulo">
                 <form action="anunciarMaestro.php" method="POST">
                     <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
-                    <button type="submit" name="submit"><?php echo htmlspecialchars($curso['nombreCurso']); ?></button>
+                    <input type="hidden" name="seccion" value="<?php echo htmlspecialchars($curso['seccion']); ?>">
+                    <button type="submit" name="submit">
+                        <?php echo htmlspecialchars($curso['nombreCurso']); ?> - <?php echo htmlspecialchars($curso['seccion']); ?>
+                    </button>
                 </form>
             </div>
         <?php } ?>

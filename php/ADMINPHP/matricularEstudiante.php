@@ -28,45 +28,44 @@ $stmt->close();
 // Redirigir basado en el rol del usuario
 switch ($user_role) {
     case 'ESTUDIANTE':
-        header("Location: ../ALUMNOPHP/UIAlumno.php"); // Redirige a la interfaz de administrador
+        header("Location: ../ALUMNOPHP/UIAlumno.php");
         exit();
     case 'DOCENTE':
-        header("Location: ../DOCENTEPHP/UIMaestro.php"); // Redirige a la interfaz de maestro
+        header("Location: ../DOCENTEPHP/UIMaestro.php");
         exit();
     case 'APODERADO':
-        header("Location: ../APODERADOPHP/UIApoderado.php"); // Redirige a la interfaz de apoderado
+        header("Location: ../APODERADOPHP/UIApoderado.php");
         exit();
 }
 
-// Verificar si el método de solicitud es POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $idEstudiante = $_POST['estudiante'];
-    $idCurso = $_POST['curso'];
+    $idUsuario = $_POST['estudiante']; // Agregar la variable para el estudiante
+    $idGrado = $_POST['grado'];
 
     // Validar los datos recibidos
-    if (empty($idEstudiante) || empty($idCurso)) {
-        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("Estudiante o curso no seleccionado."));
+    if (empty($idUsuario) || empty($idGrado)) {
+        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("Estudiante o grado no seleccionado."));
         exit();
     }
 
-    // Verificar si la combinación ya existe en la tabla alumnosmatriculados
-    $checkSql = "SELECT COUNT(*) FROM alumnosmatriculados WHERE idUsuario = ? AND idCurso = ?";
-    $stmt = $conn->prepare($checkSql);
-    $stmt->bind_param("ii", $idEstudiante, $idCurso);
+    // Verificar si el estudiante ya está matriculado en el grado
+    $checkMatriculaSql = "SELECT idUsuario FROM alumnosmatriculados WHERE idUsuario = ?";
+    $stmt = $conn->prepare($checkMatriculaSql);
+    $stmt->bind_param("i", $idUsuario);
     $stmt->execute();
-    $stmt->bind_result($count);
-    $stmt->fetch();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->close();
+        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("El estudiante ya está matriculado."));
+        exit();
+    }
     $stmt->close();
 
-    if ($count > 0) {
-        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("Este estudiante ya está matriculado en este curso."));
-        exit();
-    }
-
-    // Obtener el cupo actual del curso
-    $cupoSql = "SELECT cupos FROM cursos WHERE idCurso = ?";
+    // Obtener el cupo actual del grado
+    $cupoSql = "SELECT cupos FROM grados WHERE idGrado = ?";
     $stmt = $conn->prepare($cupoSql);
-    $stmt->bind_param("i", $idCurso);
+    $stmt->bind_param("i", $idGrado);
     $stmt->execute();
     $stmt->bind_result($cupos);
     $stmt->fetch();
@@ -74,23 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Verificar si hay cupos disponibles
     if ($cupos <= 0) {
-        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("No hay cupos disponibles para este curso."));
+        header("Location: matricularEstudiante.php?status=error&message=" . urlencode("No hay cupos disponibles para este grado."));
         exit();
     }
 
     // Insertar los datos en la tabla alumnosmatriculados
-    $sql = "INSERT INTO alumnosmatriculados (idUsuario, idCurso) VALUES (?, ?)";
+    $sql = "INSERT INTO alumnosmatriculados (idUsuario, idGrado, fechaMatricula) VALUES (?, ?, NOW())";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $idEstudiante, $idCurso);
+    $stmt->bind_param("ii", $idUsuario, $idGrado);
 
     if ($stmt->execute()) {
-        // Actualizar el cupo del curso
-        $updateCuposSql = "UPDATE cursos SET cupos = cupos - 1 WHERE idCurso = ?";
+        // Actualizar el cupo del grado
+        $updateCuposSql = "UPDATE grados SET cupos = cupos - 1 WHERE idGrado = ?";
         $stmt = $conn->prepare($updateCuposSql);
-        $stmt->bind_param("i", $idCurso);
+        $stmt->bind_param("i", $idGrado);
         $stmt->execute();
 
-        header("Location: matricularEstudiante.php?status=success&message=" . urlencode("Estudiante matriculado exitosamente."));
+        header("Location: matricularEstudiante.php?status=success&message=" . urlencode("Grado matriculado exitosamente."));
     } else {
         header("Location: matricularEstudiante.php?status=error&message=" . urlencode($conn->error));
     }
@@ -103,12 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id'])) {
     $idMatricula = $_GET['id'];
 
-    // Obtener el idCurso asociado a la matrícula
-    $getCursoSql = "SELECT idCurso FROM alumnosmatriculados WHERE idMatricula = ?";
-    $stmt = $conn->prepare($getCursoSql);
+    // Obtener el idGrado asociado a la matrícula
+    $getGradoSql = "SELECT idGrado FROM alumnosmatriculados WHERE idMatricula = ?";
+    $stmt = $conn->prepare($getGradoSql);
     $stmt->bind_param("i", $idMatricula);
     $stmt->execute();
-    $stmt->bind_result($idCurso);
+    $stmt->bind_result($idGrado);
     $stmt->fetch();
     $stmt->close();
 
@@ -118,22 +117,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
     $stmt->bind_param("i", $idMatricula);
     $stmt->execute();
 
-    // Recuperar el cupo del curso
-    $updateCuposSql = "UPDATE cursos SET cupos = cupos + 1 WHERE idCurso = ?";
+    // Recuperar el cupo del grado
+    $updateCuposSql = "UPDATE grados SET cupos = cupos + 1 WHERE idGrado = ?";
     $stmt = $conn->prepare($updateCuposSql);
-    $stmt->bind_param("i", $idCurso);
+    $stmt->bind_param("i", $idGrado);
     $stmt->execute();
     header("Location: matricularEstudiante.php?status=success&message=" . urlencode("Matrícula eliminada exitosamente."));
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matricular Estudiante</title>
+    <title>Matricular Grado</title>
     <link rel="stylesheet" href="../../css/ADMINCSS/matricularEstudiantePC.css">
     <link rel="stylesheet" href="../../css/ADMINCSS/matricularEstudianteMobile.css">
     <!-- Sidebar CSS -->
@@ -141,96 +139,81 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
     <link rel="stylesheet" href="../../css/ADMINCSS/sidebarADMINMobile.css">
 </head>
 <body>
-    <div class="notification" id="notification"></div> <!-- Contenedor de la notificación -->
+    <div class="notification" id="notification"></div>
     <div class="container">
         <!-- Incluir la Sidebar -->
         <?php include 'sidebarADMIN.php'; ?>
         <!-- Main Content -->
         <main class="main-content">
             <section>
-                <h2 style="color: white;">Matricular Estudiante en Curso</h2>
+                <h2 style="color: white;">Matricular Estudiante</h2>
                 <form action="matricularEstudiante.php" method="POST">
                     <label for="estudiante" style="color: white;">Estudiante:</label>
                     <select name="estudiante" id="estudiante" required>
                         <option value="">Seleccione un estudiante</option>
                         <?php
-                        // Obtener la lista de estudiantes
-                        $sql = "SELECT idUsuario, CONCAT(nombres, ' ', apellidos) AS nombreCompleto FROM usuarios WHERE rol = 'ESTUDIANTE'";
-                        $result = $conn->query($sql);
+                        // Obtener la lista de estudiantes con nombres y apellidos concatenados
+                        $estudiantesSql = "SELECT idUsuario, CONCAT(nombres, ' ', apellidos) AS nombreCompleto FROM usuarios WHERE rol = 'ESTUDIANTE'";
+                        $estudiantesResult = $conn->query($estudiantesSql);
 
-                        while ($row = $result->fetch_assoc()) {
+                        while ($row = $estudiantesResult->fetch_assoc()) {
                             echo '<option value="' . $row['idUsuario'] . '">' . $row['nombreCompleto'] . '</option>';
                         }
                         ?>
                     </select>
 
-                    <label for="curso" style="color: white;">Curso:</label>
-                    <select name="curso" id="curso" required>
-                        <option value="">Seleccione un curso</option>
+                    <div id="matriculacion">
+                    <strong><p>Alumno Seleccionado: <span id="estudianteSeleccionado" style="color: white;"></span></p></strong>
+                    </div>
+
+                    <label for="grado" style="color: white;">Grado:</label>
+                    <select name="grado" id="grado" required>
+                        <option value="">Seleccione un grado</option>
                         <?php
-                        // Obtener la lista de cursos
-                        $sql = "SELECT idCurso, nombreCurso FROM cursos";
+                        // Obtener la lista de grados
+                        $sql = "SELECT idGrado, nombreGrado, nivel, seccion, cupos FROM grados";
                         $result = $conn->query($sql);
-                        
+
                         while ($row = $result->fetch_assoc()) {
-                            $idCurso = $row['idCurso'];
-                            $nombreCurso = $row['nombreCurso'];
-                            echo '<option value="' . $idCurso . '">' . $nombreCurso . '</option>';
+                            $grado = $row['nombreGrado'] . ' - ' . $row['nivel'] . ' - Sección ' . $row['seccion'];
+                            $cupo = $row['cupos'];
+                            echo '<option value="' . $row['idGrado'] . '">' . $grado . ' (Cupos disponibles: ' . $cupo . ')</option>';
                         }
                         ?>
                     </select>
 
                     <div id="matriculacion">
-                        <p>Estudiante Seleccionado: <span id="estudianteSeleccionado" style="color: white;"></span></p>
-                        <p>Curso Seleccionado: <span id="cursoSeleccionado" style="color: white;"></span></p>
+                    <strong><p>Grado Seleccionado: <span id="gradoSeleccionado" style="color: white;"></span></p></strong>
                         <button type="submit">Matricular</button>
                     </div>
                 </form>
                 <br>
-                <h2 style="color: white;" class="ma">Matriculas Actuales</h2>
-                
-                <!-- Añadir el combobox para seleccionar curso -->
-                <label for="filtroCurso" style="color: white;">Filtrar por Curso:</label>
-                <select id="filtroCurso" class="cbxFiltra">
-                    <option value="">Seleccione un curso</option>
-                    <?php
-                    // Obtener la lista de cursos para el combobox de filtrado
-                    $sql = "SELECT idCurso, nombreCurso FROM cursos";
-                    $result = $conn->query($sql);
-                    
-                    while ($row = $result->fetch_assoc()) {
-                        $idCurso = $row['idCurso'];
-                        $nombreCurso = $row['nombreCurso'];
-                        echo '<option value="' . $idCurso . '">' . $nombreCurso . '</option>';
-                    }
-                    ?>
-                </select>
-
-                <!-- Añadir campo de entrada para el filtro por texto -->
-                <label for="filtroTexto" style="color: white;">Filtrar por Texto:</label>
-                <input type="text" id="filtroTexto" placeholder="Buscar estudiante o curso" class="inputFiltrar">
+                <h2 style="color: white;">Matrículas Actuales</h2>
 
                 <table id="matriculasTabla">
-                    <thead>
-                        <tr>
-                            <th>Estudiante</th>
-                            <th>Curso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
+                <thead>
+                    <tr>
+                        <th>Estudiante</th>
+                        <th>Grado</th>
+                        <th>Nivel</th>
+                        <th>Sección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
                     <tbody>
                         <?php
-                        // Obtener la lista de matrículas
-                        $sql = "SELECT a.idMatricula, CONCAT(u.nombres, ' ', u.apellidos) AS nombreEstudiante, c.idCurso, c.nombreCurso 
-                                FROM alumnosmatriculados a 
-                                JOIN usuarios u ON a.idUsuario = u.idUsuario 
-                                JOIN cursos c ON a.idCurso = c.idCurso";
+                        // Obtener la lista de matrículas con el nombre del estudiante concatenado
+                        $sql = "SELECT a.idMatricula, CONCAT(u.nombres, ' ', u.apellidos) AS nombreEstudiante, g.nombreGrado, g.nivel, g.seccion
+                                FROM alumnosmatriculados a
+                                JOIN grados g ON a.idGrado = g.idGrado
+                                JOIN usuarios u ON a.idUsuario = u.idUsuario";
                         $result = $conn->query($sql);
-
                         while ($row = $result->fetch_assoc()) {
-                            echo '<tr data-curso-id="' . $row['idCurso'] . '" data-nombre-estudiante="' . $row['nombreEstudiante'] . '" data-nombre-curso="' . $row['nombreCurso'] . '">';
+                            echo '<tr>';
                             echo '<td style="color: white;">' . $row['nombreEstudiante'] . '</td>';
-                            echo '<td style="color: white;">' . $row['nombreCurso'] . '</td>';
+                            echo '<td style="color: white;">' . $row['nombreGrado'] . '</td>';
+                            echo '<td style="color: white;">' . $row['nivel'] . '</td>';
+                            echo '<td style="color: white;">' . $row['seccion'] . '</td>';
                             echo '<td><a href="matricularEstudiante.php?action=eliminar&id=' . $row['idMatricula'] . '">Eliminar</a></td>';
                             echo '</tr>';
                         }
@@ -263,46 +246,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'eliminar' && isset($_GET['id']
             }
 
             // Mostrar selección
+            document.getElementById('grado').addEventListener('change', function() {
+                var grado = this.options[this.selectedIndex].text;
+                document.getElementById('gradoSeleccionado').innerText = grado;
+            });
+
             document.getElementById('estudiante').addEventListener('change', function() {
                 var estudiante = this.options[this.selectedIndex].text;
                 document.getElementById('estudianteSeleccionado').innerText = estudiante;
-            });
-
-            document.getElementById('curso').addEventListener('change', function() {
-                var curso = this.options[this.selectedIndex].text;
-                document.getElementById('cursoSeleccionado').innerText = curso;
-            });
-
-            // Filtrar la tabla por curso seleccionado
-            document.getElementById('filtroCurso').addEventListener('change', function() {
-                var cursoId = this.value;
-                var rows = document.querySelectorAll('#matriculasTabla tbody tr');
-
-                rows.forEach(function(row) {
-                    var rowCursoId = row.getAttribute('data-curso-id');
-                    if (cursoId === "" || rowCursoId === cursoId) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            });
-
-            // Filtrar la tabla por texto
-            document.getElementById('filtroTexto').addEventListener('input', function() {
-                var texto = this.value.toLowerCase();
-                var rows = document.querySelectorAll('#matriculasTabla tbody tr');
-
-                rows.forEach(function(row) {
-                    var nombreEstudiante = row.getAttribute('data-nombre-estudiante').toLowerCase();
-                    var nombreCurso = row.getAttribute('data-nombre-curso').toLowerCase();
-
-                    if (nombreEstudiante.includes(texto) || nombreCurso.includes(texto)) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
             });
         };
     </script>

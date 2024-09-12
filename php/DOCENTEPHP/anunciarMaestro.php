@@ -28,36 +28,37 @@ $stmt->close();
 // Redirigir basado en el rol del usuario
 switch ($user_role) {
     case 'ESTUDIANTE':
-        header("Location: ../ALUMNOPHP/UIAlumno.php"); // Redirige a la interfaz de administrador
+        header("Location: ../ALUMNOPHP/UIAlumno.php"); // Redirige a la interfaz de estudiante
         exit();
     case 'ADMIN':
-        header("Location: ../ADMINPHP/UIAdmin.php"); // Redirige a la interfaz de maestro
+        header("Location: ../ADMINPHP/UIAdmin.php"); // Redirige a la interfaz de administrador
         exit();
     case 'APODERADO':
         header("Location: ../APODERADOPHP/UIApoderado.php"); // Redirige a la interfaz de apoderado
         exit();
 }
 
-// Verificar si se ha recibido el curso y la descripción para el anuncio
+// Verificar si se ha recibido el curso, la descripción y la sección para el anuncio
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['nombreCurso']) && isset($_POST['descripcion'])) {
+    if (isset($_POST['nombreCurso']) && isset($_POST['descripcion']) && isset($_POST['seccion'])) {
         // Obtener los valores enviados por POST
         $nombreCurso = $_POST['nombreCurso'];
         $descripcion = $_POST['descripcion'];
+        $seccion = $_POST['seccion'];
 
         // Obtener la fecha y hora actual
         $fecha = date('Y-m-d');
         $hora = date('H:i:s');
 
         // Insertar el anuncio en la tabla anunciosMaestro
-        $stmt = $conn->prepare("INSERT INTO anunciosMaestro (nombreCurso, descripcion, fecha, hora) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO anunciosMaestro (nombreCurso, seccion, descripcion, fecha, hora) VALUES (?, ?, ?, ?, ?)");
         if ($stmt === false) {
             $errorMsg = urlencode("Error en la preparación de la consulta: " . $conn->error);
-            header("Location: anunciarMaestro.php?status=error&message=$errorMsg");
+            header("Location: anunciar.php?status=error&message=$errorMsg");
             exit();
         }
 
-        $stmt->bind_param("ssss", $nombreCurso, $descripcion, $fecha, $hora);
+        $stmt->bind_param("sssss", $nombreCurso, $seccion, $descripcion, $fecha, $hora);
         if ($stmt->execute()) {
             // Redirigir con éxito
             header("Location: anunciar.php?status=success");
@@ -85,28 +86,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../../css/DOCENTECSS/sidebarMAESTROMobile.css">
 </head>
 <body>
-<div class="notification" id="notification"></div> <!-- Contenedor de la notificación -->
+    <div class="notification" id="notification"></div> <!-- Contenedor de la notificación -->
     <!-- Incluir la Sidebar -->
     <?php include 'sidebarMAESTRO.php'; ?>
+    
     <?php
     // Verificar si se ha recibido el nombre del curso desde el formulario
-    if (isset($_POST['nombreCurso'])) {
+    if (isset($_POST['nombreCurso']) && isset($_POST['seccion'])) {
         $nombreCurso = $_POST['nombreCurso'];
+        $seccion = $_POST['seccion'];
     ?>
-        <h2 class="anuncio" style="margin-left: 180px; color: white;" >Crear un anuncio para el curso: <?php echo htmlspecialchars($nombreCurso); ?></h2>
+        <h2 class="anuncio" style="margin-left: 180px; color: white;">Crear un anuncio para el curso: <?php echo htmlspecialchars($nombreCurso); ?> - <?php echo htmlspecialchars($seccion); ?></h2>
         <div class="form-container">
-        <form action="anunciarMaestro.php" method="POST">
-            <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($nombreCurso); ?>">
-            <textarea name="descripcion" id="descripcion" rows="4" cols="50" required></textarea><br>
-            <input type="submit" value="Enviar Anuncio">
-        </form>
+            <form action="anunciarMaestro.php" method="POST">
+                <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($nombreCurso); ?>">
+                <input type="hidden" name="seccion" value="<?php echo htmlspecialchars($seccion); ?>">
+                <textarea name="descripcion" id="descripcion" rows="4" cols="50" required></textarea><br>
+                <input type="submit" value="Enviar Anuncio">
+            </form>
         </div>
     <?php
     } else {
         echo "No se ha seleccionado ningún curso.";
     }
     ?>
-<script>
+
+    <script>
         window.onload = function() {
             var urlParams = new URLSearchParams(window.location.search);
             var status = urlParams.get('status');

@@ -63,23 +63,25 @@
             $resultUsuario = mysqli_query($conn, $queryUsuario);
             $idUsuario = mysqli_fetch_assoc($resultUsuario)['idUsuario'];
 
-            // Obtener los cursos asignados al docente (idDocente = idUsuario) de la tabla especialidad_docente
             $queryCursos = "
-                SELECT cursos.nombreCurso 
-                    FROM especialidaddocente 
-                    JOIN cursos ON especialidaddocente.idEspecialidad = cursos.idEspecialidad
-                    WHERE especialidaddocente.idDocente = '$idUsuario'
-            ";
-            $resultCursos = mysqli_query($conn, $queryCursos);
-            ?>
-
-            <div class="contenedor-cursos">
-                <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
-                    <div class="curso-modulo">
-                        <button><?php echo $curso['nombreCurso']; ?></button>
-                    </div>
-                <?php } ?>
-            </div>
+            SELECT cursos.nombreCurso, grados.seccion
+            FROM cursos
+            JOIN grados ON cursos.idGrado = grados.idGrado
+            JOIN especialidaddocente ON cursos.idEspecialidad = especialidaddocente.idEspecialidad
+            WHERE especialidaddocente.idDocente = '$idUsuario'
+        ";
+        $resultCursos = mysqli_query($conn, $queryCursos);
+        ?>
+        
+        <div class="contenedor-cursos">
+            <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
+                <div class="curso-modulo">
+                    <button>
+                        <?php echo htmlspecialchars($curso['nombreCurso']); ?> - <?php echo htmlspecialchars($curso['seccion']); ?>
+                    </button>
+                </div>
+            <?php } ?>
+        </div>
 </body>
 </html>
 

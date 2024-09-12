@@ -41,18 +41,18 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nombreCurso = $_POST['nombreCurso'] ?: null;
         $idEspecialidad = $_POST['idEspecialidad'] ?: null;
-        
+        $idGrado = $_POST['idGrado'] ?: null;
+
         // Validar los datos recibidos
-        if (empty($nombreCurso) || empty($idEspecialidad)) {
+        if (empty($nombreCurso) || empty($idEspecialidad) || empty($idGrado)) {
             header("Location: agregar_curso.php?status=error&message=" . urlencode("Todos los campos son requeridos."));
             exit();
         }
 
         // Insertar el curso en la base de datos
-        $sqlCurso = "INSERT INTO cursos (nombreCurso, idEspecialidad, cupos) VALUES (?, ?, ?)";
+        $sqlCurso = "INSERT INTO cursos (nombreCurso, idEspecialidad, idGrado) VALUES (?, ?, ?)";
         $stmtCurso = $conn->prepare($sqlCurso);
-        $cupos = 10; // Valor por defecto
-        $stmtCurso->bind_param("ssi", $nombreCurso, $idEspecialidad, $cupos);
+        $stmtCurso->bind_param("sii", $nombreCurso, $idEspecialidad, $idGrado);
 
         if ($stmtCurso->execute()) {
             $idCurso = $stmtCurso->insert_id; // Obtener el ID del curso recién insertado
@@ -120,6 +120,23 @@
 
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value=\"{$row['idEspecialidad']}\">{$row['nombreEspecialidad']}</option>";
+                        }
+                        ?>
+                    </select>
+
+                    <label for="idGrado" style="color:white">Grado:</label>
+                    <select name="idGrado" id="idGrado" required>
+                        <?php
+                        // Obtener grados y secciones para llenar el combo box
+                        $sql = "
+                            SELECT idGrado, nombreGrado, seccion from grados ;
+                        ";
+                        $result = $conn->query($sql);
+
+                        while ($row = $result->fetch_assoc()) {
+                            // Concatenar el nombre del grado y la sección
+                            $gradoSeccion = "{$row['nombreGrado']} - {$row['seccion']}";
+                            echo "<option value=\"{$row['idGrado']}\">{$gradoSeccion}</option>";
                         }
                         ?>
                     </select>

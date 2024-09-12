@@ -1,0 +1,78 @@
+/* ==========================================*/
+/* Mobile */
+@media (max-width: 767px) {
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        justify-content: center; /* Centrar el contenedor de los cursos horizontalmente */
+        align-items: flex-start; /* Alinear hacia la parte superior */
+        min-height: 100vh; /* Asegurar que la altura cubra toda la pantalla */
+        padding-top: 20px; /* Añadir espacio superior */
+        color: #ffffff;
+    }
+
+
+    .contenedor-anuncios {
+        display: flex;
+        flex-direction: column; /* Coloca los anuncios uno encima del otro */
+        gap: 20px; /* Espacio entre los anuncios */
+        align-items: center; /* Centra los anuncios horizontalmente */
+        padding: 10px; /* Espacio interno para el contenedor */
+        width: 100%; /* Ancho completo */
+    }
+
+    .anuncio-modulo {
+        color: #000;
+        background-color: #fff; /* Fondo blanco */
+        border: 2px solid #000; /* Bordes negros */
+        border-radius: 12px; /* Bordes curvos */
+        padding: 15px; /* Espacio interno */
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+        text-align: center; /* Centra el texto dentro del anuncio */
+        font-size: 1em; /* Tamaño del texto */
+        margin-left: 150px;
+        width: 50%; /* Ancho del módulo */
+        max-width: 600px; /* Máximo ancho del módulo */
+    }
+
+    .anuncio-modulo h3 {
+        margin-bottom: 10px; /* Espacio debajo del título */
+    }
+
+    .anuncio-modulo p {
+        margin: 0; /* Elimina el margen por defecto */
+    }
+
+    .notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50; /* Color verde para éxito */
+        color: white;
+        padding: 16px;
+        border-radius: 5px;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 16px; /* Tamaño del texto en notificación */
+    }
+
+    .notification.show {
+        display: block;
+    }
+
+    .notification.error {
+        background-color: #f44336; /* Color rojo para error */
+    }
+}
