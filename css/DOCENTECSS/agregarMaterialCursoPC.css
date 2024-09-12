@@ -19,7 +19,7 @@
         display: flex;
         flex-direction: column; /* Coloca los módulos uno encima del otro */
         gap: 20px; /* Espacio entre los módulos */
-        margin-left: 200px; /* Desplaza el contenedor hacia la derecha */
+        margin-left: 350px; /* Desplaza el contenedor hacia la derecha */
         margin-top: 50px;
         align-items: flex-start; /* Alinea los módulos hacia la izquierda dentro del contenedor */
     }

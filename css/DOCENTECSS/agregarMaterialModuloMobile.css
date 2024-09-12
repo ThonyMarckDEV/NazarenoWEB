@@ -47,13 +47,19 @@
     }
 
     .material{
-        margin-left: 180px;
+        margin-left: 160px;
         margin-top: 10px;
+        color: white;
     }
 
     .actividad{
-        margin-left: 180px;
+        margin-left: 160px;
         margin-top: 10px;
+        color: white;
+    }
+    
+    .labelarchivo{
+        margin-top: 20px;
     }
 
     form input {

@@ -123,7 +123,7 @@ if (isset($_POST['subirMaterial'])) {
             <h2 class="material">Agregar Material</h2>
             <form action="agregarMaterialModulo.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="idModulo" value="<?php echo htmlspecialchars($idModulo); ?>">
-                <label for="archivo">Selecciona un archivo:</label>
+                <label for="archivo" class="labelarchivo">Selecciona un archivo:</label>
                 <input type="file" id="archivo" name="archivo" required><br><br>
                 <button type="submit" name="subirMaterial">Subir Archivo</button>
             </form>
