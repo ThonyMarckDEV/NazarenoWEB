@@ -19,6 +19,16 @@
         flex-direction: column;
     }
 
+    .cbxSexo{
+        height: 50px;
+        background-color: white;
+    }
+
+    .departamento{
+        height: 50px;
+        background-color: white;
+    }
+
     .perfil-info {
         display: flex;
         margin-bottom: 20px;
