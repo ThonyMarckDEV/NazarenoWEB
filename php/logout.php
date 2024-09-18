@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// Verificar si la sesión ya está destruida para evitar bucles
+if (!isset($_SESSION['user'])) {
+    // Si no hay sesión, redirigir al login y evitar bucles
+    header("Location: ../../index.php");
+    exit();
+}
+
 // Incluir la conexión a la base de datos
 include 'conexion.php';
 
@@ -17,9 +24,9 @@ if (isset($_SESSION['user'])) {
     // Cerrar la sesión
     session_unset();
     session_destroy();
-}
 
-// Redirigir a la página de inicio de sesión
-header("Location: ../index.php");
-exit();
+    // Redirigir a la página de inicio de sesión una vez que la sesión está destruida
+    header("Location: ../../index.php");
+    exit();
+}
 ?>

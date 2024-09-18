@@ -32,6 +32,6 @@ $conn->close();
 if ($status === 'loggedOff') {
     echo "loggedOff";
 } else {
-    echo "loggedIn";
+    echo "loggedOn";
 }
 ?>

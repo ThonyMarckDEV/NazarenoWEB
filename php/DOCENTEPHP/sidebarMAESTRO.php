@@ -55,26 +55,57 @@ $username = $_SESSION['user'];
     </nav>
 </aside>
 <script>
-        // Función para verificar el estado de la sesión del usuario
-        function verificarEstadoUsuario() {
-            fetch('../verificar_estado.php', { // Ajusta la ruta según la ubicación de verificar_estado.php
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                cache: 'no-cache'  // Evitar caché en solicitudes
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === "loggedOff") {
-                    // Redirigir al index si está deslogueado
-                    window.location.href = '../../index.php';
-                }
-            })
-            .catch(error => console.error('Error al verificar el estado del usuario:', error));
+    // Variables para rastrear la inactividad
+    let tiempoInactividad = 0;
+    let sesionCerrada = false;  // Bandera para evitar múltiples redirecciones
+
+    // Función para restablecer el temporizador de inactividad
+    function reiniciarTiempoInactividad() {
+        tiempoInactividad = 0;  // Restablecer el contador de inactividad
+    }
+
+    // Función para verificar el estado del usuario
+    function verificarEstadoUsuario() {
+        fetch('../verificar_estado.php', {  // Verificar si la sesión sigue activa
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            cache: 'no-cache'
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data === "loggedOff" && !sesionCerrada) {
+                // Redirigir a logout.php si el estado es "loggedOff"
+                window.location.href = '../logout.php';
+            }
+        })
+        .catch(error => console.error('Error al verificar el estado del usuario:', error));
+    }
+
+    // Función para redirigir a logout.php por inactividad
+    function cerrarSesionPorInactividad() {
+        if (!sesionCerrada) {  // Solo redirigir si no se ha cerrado la sesión aún
+            sesionCerrada = true;  // Marcar la sesión como cerrada
+            window.location.href = '../logout.php';  // Redirigir a logout.php
         }
+    }
 
-        // Ejecutar la verificación cada 3 segundos
-        setInterval(verificarEstadoUsuario, 3000);
+    // Incrementar el tiempo de inactividad cada segundo
+    setInterval(() => {
+        tiempoInactividad += 1;
 
-        // Ejecutar la verificación al cargar la página
-        verificarEstadoUsuario();
-    </script>
+        if (tiempoInactividad >= 30) { // 30 segundos de inactividad
+            cerrarSesionPorInactividad();
+        }
+    }, 1000);
+
+    // Escuchar eventos de actividad (teclado o mouse) y reiniciar el temporizador
+    window.addEventListener('mousemove', reiniciarTiempoInactividad);
+    window.addEventListener('keydown', reiniciarTiempoInactividad);
+
+    // Ejecutar la verificación de sesión al cargar la página
+    verificarEstadoUsuario();
+
+    // Ejecutar la verificación de sesión cada 3 segundos
+    setInterval(verificarEstadoUsuario, 3000);
+
+</script>
