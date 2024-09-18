@@ -1,0 +1,76 @@
+/* ==========================================*/
+/* Móvil */
+@media (max-width: 767px) {
+       /* General Styles */
+       * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        justify-content: center; /* Centrar el contenedor de los cursos horizontalmente */
+        align-items: flex-start; /* Alinear hacia la parte superior */
+        min-height: 100vh; /* Asegurar que la altura cubra toda la pantalla */
+        padding-top: 20px; /* Añadir espacio superior */
+        color: #ffffff;
+    }
+
+    .contenedor-cursos {
+        display: flex;
+        flex-wrap: wrap; /* Permite que los módulos se ajusten en filas si no hay espacio */
+        gap: 10px; /* Reducir espacio entre cada módulo */
+        justify-content: center; /* Centrar los módulos en la pantalla */
+        margin: 0; /* Eliminar márgenes laterales */
+        padding: 10px; /* Añadir un poco de espacio interno alrededor de los módulos */
+    }
+    
+    .curso-modulo {
+        background-color: #fff; /* Fondo blanco */
+        border: 2px solid #000; /* Bordes negros */
+        border-radius: 8px; /* Bordes ligeramente redondeados */
+        width: 90%; /* Ajustar al 90% del ancho de la pantalla para mejorar el espacio entre módulos */
+        max-width: 320px; /* Limitar el ancho máximo en móviles */
+        height: 100px; /* Alto del módulo */
+        margin-left: 150px;
+        display: flex;
+        align-items: center; /* Centra el contenido verticalmente */
+        justify-content: center; /* Centra el contenido horizontalmente */
+        position: relative;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+        cursor: pointer; /* Cambia el cursor a pointer para indicar que es interactivo */
+    }
+
+    .curso-modulo::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 40px;
+        height: 10px;
+        background-color: #fff;
+        border-top: 2px solid #000;
+        border-left: 2px solid #000;
+        border-right: 2px solid #000;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .curso-modulo button {
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        color: #333;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .curso-modulo:hover {
+        background-color: #f0f0f0; /* Efecto hover, cambia ligeramente el fondo */
+    }
+}

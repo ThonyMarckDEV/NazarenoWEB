@@ -1,0 +1,108 @@
+/* Estilos generales que ya tienes */
+@media (min-width: 991px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        height: 100vh;
+        color: #333;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+    }
+
+    /* Sidebar ya está definida en el archivo sidebar.php */
+    
+    /* Main Content Styles */
+    .main-content {
+        flex-grow: 1;
+        padding: 40px;
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    form {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    form input,
+    form select {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    form button {
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 20px;
+    }
+
+    form button:hover {
+        background-color: #555;
+    }
+
+    section {
+        margin-bottom: 40px;
+    }
+
+    .notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50; /* Color verde para éxito */
+        color: white;
+        padding: 16px;
+        border-radius: 5px;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 18px;
+    }
+    .notification.show {
+        display: block;
+    }
+   
+    .notification.error {
+        background-color: #f44336; /* Color rojo para error */
+    }
+
+ 
+    /* Estilos para la sección de asignación */
+    #asignacion p {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    #especialidadSeleccionada,
+    #docenteSeleccionado {
+        font-weight: bold;
+        color: #555;
+    }
+}

@@ -1,0 +1,136 @@
+@media (min-width: 991px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        height: 100vh;
+        color: #ffffff;
+    }
+
+    form {
+        width: 450px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-left: 480px;
+    }
+
+    .material{
+        margin-left: 470px;
+        margin-top: 80px;
+    }
+
+    .actividad{
+        margin-left: 470px;
+        margin-top: 90px;
+    }
+
+    form input {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    /* Estilos para el contenedor del rol y combobox */
+    .role-container {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Espacio entre el campo de texto y el combobox */
+    }
+
+    .role-container input {
+        flex-grow: 1;
+    }
+
+    form select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    form button {
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    form button:hover {
+        background-color: #555;
+    }
+
+    section {
+        margin-bottom: 40px;
+    }
+
+    .anuncio{
+        color: black;
+        margin-top: 50px;
+        margin-left: 500px;
+    }
+
+      /* Estilos para el campo de texto */
+      textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        resize: none;
+    }
+
+    /* Botón de enviar */
+    input[type="submit"] {
+        background-color: #ffffff;
+        color: #000000;
+        border: 2px solid #000000;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Efecto de hover para el botón */
+    input[type="submit"]:hover {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    .notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50; /* Color verde para éxito */
+        color: white;
+        padding: 16px;
+        border-radius: 5px;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-size: 18px;
+    }
+    .notification.show {
+        display: block;
+    }
+}
