@@ -1,5 +1,10 @@
 <?php
+// Desactivar la visualización de warnings
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+ini_set('display_errors', 0);
+
 session_start();
+
 
 // Incluir la conexión a la base de datos
 include 'conexion.php';

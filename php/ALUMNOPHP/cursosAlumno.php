@@ -77,8 +77,8 @@ $resultCursos = $stmtCursos->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anunciar - C.E.B.E</title>
-    <link rel="stylesheet" href="../../css/DOCENTECSS/anunciarPC.css">
-    <link rel="stylesheet" href="../../css/DOCENTECSS/anunciarMobile.css">
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/cursosAlumnoPC.css">
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/cursosAlumnoMobile.css">
     <!-- Sidebar CSS -->
     <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOPC.css">
     <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOMobile.css">
@@ -88,17 +88,20 @@ $resultCursos = $stmtCursos->get_result();
     <?php include 'sidebarAlumno.php'; ?>
 
     <div class="contenedor-cursos">
-        <?php
-            if ($resultCursos->num_rows > 0) {
-                while ($curso = $resultCursos->fetch_assoc()) { ?>
-                    <div class="curso-modulo">
-                        <button><?php echo htmlspecialchars($curso['nombreCurso']); ?></button>
-                    </div>
-                <?php }
-            } else {
-                echo '<p style="color:black;">No estás matriculado en ningún curso.</p>';
-            }
-        ?>
-    </div>
+    <?php
+        if ($resultCursos->num_rows > 0) {
+            while ($curso = $resultCursos->fetch_assoc()) { ?>
+                <div class="curso-modulo">
+                    <form action="verCursoAlumno.php" method="POST">
+                        <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
+                        <button type="submit"><?php echo htmlspecialchars($curso['nombreCurso']); ?></button>
+                    </form>
+                </div>
+            <?php }
+        } else {
+            echo '<p style="color:black;">No estás matriculado en ningún curso.</p>';
+        }
+    ?>
+</div>
 </body>
 </html>

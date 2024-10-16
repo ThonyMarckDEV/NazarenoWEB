@@ -1,0 +1,179 @@
+/* ==========================================*/
+/* PC */
+@media (min-width: 991px) {
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        justify-content: flex-start; /* Centra el contenido horizontalmente */
+        align-items: flex-start; /* Centra el contenido verticalmente */
+        height: 100vh; /* Para ocupar toda la pantalla */
+        color: #ffffff;
+    }
+
+    /* Main content container */
+    .container {
+        width: 80; /* Ajusta el ancho del contenido */
+        max-width: 1000px; /* Limita el ancho máximo */
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+        border-radius: 15px; /* Bordes redondeados */
+        padding: 20px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+        display: flex;
+        flex-direction: column; /* Organiza todo en vertical */
+        align-items: center;
+        gap: 20px; /* Espacio entre elementos */
+        color: #333; /* Texto negro */
+    }
+
+    /* Estilo para material del módulo */
+    .material-modulo {
+        background-color: #ffffff; /* Fondo blanco */
+        color: #333; /* Texto negro */
+        width: 350px; /* Ajusta el ancho para ocupar todo el espacio del contenedor */
+        border-radius: 10px; /* Bordes redondeados */
+        padding: 20px;
+        margin-top: 300px;
+        margin-left: 100px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Espacio entre los elementos dentro del material */
+    }
+
+    .material-modulo h3 {
+        margin: 0;
+        font-size: 1.8em;
+        color: #333;
+    }
+
+    .material-modulo p {
+        font-size: 1em;
+        color: #666; /* Texto ligeramente más claro para la descripción */
+    }
+
+    /* Botón para descargar material */
+    .material-modulo a {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .material-modulo a:hover {
+        background-color: #555; /* Cambio de color en hover */
+    }
+
+    /* Estilo para actividades del módulo */
+    .actividades-modulo {
+        width: 600px; /* Ocupa el mismo ancho que el material */
+        margin-top: 90px;
+        margin-left: 100px;
+        display: flex;
+        flex-direction: column; /* Organiza las actividades en columna, una debajo de la otra */
+        gap: 20px; /* Espacio entre cada actividad */
+    }
+
+    .actividad {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Sombra para las actividades */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%; /* Asegura que la actividad ocupe todo el ancho disponible */
+    }
+
+    .actividad h3 {
+        margin: 0;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    .actividad p {
+        font-size: 1em;
+        color: #666; /* Texto ligeramente más claro para la descripción */
+    }
+
+    /* Botones generales */
+    button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #555; /* Cambio de color al pasar el cursor */
+    }
+
+    /* Formularios */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Espacio entre los elementos del formulario */
+    }
+
+    input[type="text"], input[type="password"], input[type="file"], textarea {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+        height: 150px;
+        resize: vertical; /* Permite cambiar el tamaño vertical del textarea */
+    }
+
+ 
+
+    /* Tablas */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    table th {
+        background-color: #333;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+    }
+}
