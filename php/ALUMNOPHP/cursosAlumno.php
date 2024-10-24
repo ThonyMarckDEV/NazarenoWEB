@@ -102,6 +102,6 @@ $resultCursos = $stmtCursos->get_result();
             echo '<p style="color:black;">No estás matriculado en ningún curso.</p>';
         }
     ?>
-</div>
+    </div>
 </body>
 </html>

@@ -72,16 +72,18 @@
         ";
         $resultCursos = mysqli_query($conn, $queryCursos);
         ?>
-        
-        <div class="contenedor-cursos">
-            <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
-                <div class="curso-modulo">
-                    <button>
-                        <?php echo htmlspecialchars($curso['nombreCurso']); ?> - <?php echo htmlspecialchars($curso['seccion']); ?>
-                    </button>
-                </div>
-            <?php } ?>
-        </div>
+       <div class="contenedor-cursos">
+                <?php while ($curso = mysqli_fetch_assoc($resultCursos)) { ?>
+                    <div class="curso-modulo">
+                        <form action="tareasmodulos.php" method="POST">
+                            <input type="hidden" name="nombreCurso" value="<?php echo htmlspecialchars($curso['nombreCurso']); ?>">
+                            <button type="submit" name="submit">
+                                <?php echo htmlspecialchars($curso['nombreCurso']); ?> - <?php echo htmlspecialchars($curso['seccion']); ?>
+                            </button>
+                        </form>
+                    </div>
+                <?php } ?>
+            </div>
 </body>
 </html>
 
