@@ -96,14 +96,6 @@ if (isset($_GET['mensaje'])) {
     }
 }
 
-// Si no se ha encontrado el archivo o actividades, envía un mensaje de error
-if ($archivo === null) {
-    echo '<p>No hay material disponible para este módulo.</p>';
-}
-if ($resultActividades->num_rows === 0) {
-    echo '<p>No hay actividades asignadas para este módulo.</p>';
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
