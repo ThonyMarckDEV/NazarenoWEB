@@ -1,0 +1,138 @@
+@media (max-width: 767px) {
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        justify-content: center; /* Centra el contenido horizontalmente */
+        align-items: flex-start; /* Alinea el contenido arriba */
+        height: 100vh; /* Para ocupar toda la pantalla */
+        color: #ffffff;
+    }
+
+    /* Main content container */
+    .container {
+        width: 60%; /* Ocupa todo el ancho disponible en dispositivos móviles */
+        margin-left: 500px;
+        max-width: 100%; /* Elimina la limitación de ancho máximo */
+        border-radius: 15px; /* Bordes redondeados */
+        padding: 15px; /* Ajuste del padding para móvil */
+        display: flex;
+        flex-direction: column; /* Organiza todo en vertical */
+        align-items: center;
+        gap: 10px; /* Espacio entre elementos */
+        color: #333; /* Texto negro */
+        margin: 0 10px; /* Agrega margen horizontal */
+    }
+
+    /* Estilo para actividades del módulo */
+    .actividades-modulo {
+        margin-left: 150px;
+        width: 100%; /* Ocupa todo el ancho disponible */
+        margin-top: 20px; /* Menos margen superior */
+        display: flex;
+        flex-direction: column; /* Organiza las actividades en columna */
+        gap: 10px; /* Espacio entre cada actividad */
+    }
+
+    .actividad {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 15px; /* Reducción del padding para móvil */
+        border-radius: 8px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Sombra para las actividades */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%; /* Asegura que la actividad ocupe todo el ancho disponible */
+    }
+
+    .actividad h3 {
+        margin: 0;
+        font-size: 1.2em; /* Reducción del tamaño de fuente */
+        color: #333;
+    }
+
+    .actividad p {
+        font-size: 0.9em; /* Reducción del tamaño de fuente */
+        color: #666; /* Texto ligeramente más claro para la descripción */
+    }
+
+    /* Botones generales */
+    button {
+        background-color: #333;
+        color: #fff;
+        padding: 8px 15px; /* Ajusta el tamaño del botón para móvil */
+        font-size: 1em; /* Reducción del tamaño de fuente */
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #555; /* Cambio de color al pasar el cursor */
+    }
+
+    /* Formularios */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Espacio entre los elementos del formulario */
+    }
+
+    input[type="text"], input[type="password"], input[type="file"], textarea {
+        width: 90%; /* Aumenta el ancho para que ocupe casi toda la pantalla */
+        max-width: 100%; /* Elimina el límite de ancho */
+        padding: 8px; /* Reducción del padding */
+        font-size: 1em;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+        height: 100px; /* Reducción de la altura */
+        resize: vertical; /* Permite cambiar el tamaño vertical del textarea */
+    }
+
+    /* Tablas */
+    table {
+        width: 100%; /* Ocupa todo el ancho de la pantalla */
+        border-collapse: collapse;
+        margin: 10px 0; /* Reducción del margen */
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 8px; /* Reducción del padding */
+        text-align: center;
+        font-size: 0.9em; /* Reducción del tamaño de fuente */
+    }
+
+    table th {
+        background-color: #333;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+    }
+
+    .aea{
+        margin-left: 150px;
+    }
+}

@@ -48,7 +48,7 @@ $username = $_SESSION['user'];
         <ul>
             <li><a href="perfilMaestro.php"><img src="../../img/perfil.png" alt="Perfil" class="menu-icon">Perfil</a></li>
             <li><a href="anunciar.php"><img src="../../img/anunciar.png" alt="Anunciar" class="menu-icon">Anunciar</a></li>
-            <li><a href="tareasPendientes.php"><img src="../../img/tareas.png" alt="Tareas Pendientes" class="menu-icon">Tareas Pendientes</a></li>
+            <li><a href="tareasPendientes.php"><img src="../../img/tareas.png" alt="Tareas Pendientes" class="menu-icon">Calificar Tareas</a></li>
             <li><a href="agregarMaterial.php"><img src="../../img/material.png" alt="Agregar Material" class="menu-icon">Agregar Material</a></li>
             <li><a href="../logout.php"><img src="../../img/logout.png" alt="Cerrar Sesión" class="menu-icon">Cerrar Sesión</a></li>
         </ul>

@@ -8,7 +8,35 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Incluir la conexión a la base de datos
-include '../conexion.php'; 
+include '../conexion.php';
+
+// Obtener el nombre de usuario de la sesión
+$username = $_SESSION['user'];
+
+// Preparar y ejecutar la consulta para obtener el rol del usuario
+$stmt = $conn->prepare("SELECT rol FROM usuarios WHERE username = ?");
+if ($stmt === false) {
+    die("Error en la preparación de la consulta: " . $conn->error);
+}
+
+$stmt->bind_param("s", $username); // Cambia el tipo de parámetro a 's' para string
+$stmt->execute();
+$stmt->bind_result($user_role);
+$stmt->fetch();
+$stmt->close();
+
+// Redirigir basado en el rol del usuario
+switch ($user_role) {
+    case 'DOCENTE':
+        header("Location: ../DOCENTEPHP/UIMaestro.php");
+        exit();
+    case 'ADMIN':
+        header("Location: ../ADMINPHP/UIAdmin.php");
+        exit();
+    case 'APODERADO':
+        header("Location: ../APODERADO/UIApoderado.php");
+        exit();
+}
 
 // Obtener el idUsuario de la tabla usuarios
 $user = $_SESSION['user'];
@@ -45,7 +73,7 @@ $resultArchivo = $stmtArchivo->get_result();
 if ($resultArchivo->num_rows > 0) {
     $archivo = $resultArchivo->fetch_assoc();
 } else {
-    $archivo = null; // Asignar null si no hay archivo
+    $archivo = null;
 }
 
 // Obtener las actividades asignadas al módulo
@@ -72,85 +100,80 @@ if (isset($_GET['mensaje'])) {
 
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Material y Actividades del Módulo</title>
-        <link rel="stylesheet" href="../../css/ALUMNOCSS/verModuloAlumnoPC.css">
-        <link rel="stylesheet" href="../../css/ALUMNOCSS/verModuloAlumnoMobile.css">
-        <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOPC.css">
-        <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOMobile.css">
-        <style>
-            .notificacion {
-                position: fixed;
-                top: 20px; /* Espacio desde la parte superior */
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: green; /* Fondo verde */
-                color: white; /* Texto blanco */
-                padding: 10px 20px; /* Espaciado interno */
-                border-radius: 5px; /* Bordes curvos */
-                z-index: 1000; /* Asegura que la notificación esté por encima de otros elementos */
-                display: none; /* Oculta por defecto */
-                opacity: 1; /* Totalmente visible */
-                transition: opacity 0.5s ease; /* Transición suave para el desvanecimiento */
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material y Actividades del Módulo</title>
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/verModuloAlumnoPC.css">
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/verModuloAlumnoMobile.css">
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOPC.css">
+    <link rel="stylesheet" href="../../css/ALUMNOCSS/sidebarALUMNOMobile.css">
     <style>
         .notificacion {
             position: fixed;
-            top: 20px; /* Espacio desde la parte superior */
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: green; /* Fondo verde */
-            color: white; /* Texto blanco */
-            padding: 10px 20px; /* Espaciado interno */
-            border-radius: 5px; /* Bordes curvos */
-            z-index: 1000; /* Asegura que la notificación esté por encima de otros elementos */
-            display: none; /* Oculta por defecto */
-            opacity: 1; /* Totalmente visible */
-            transition: opacity 0.5s ease; /* Transición suave para el desvanecimiento */
-        }
-
-
-        .notification.show {
-            display: block;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
     </style>
-    <body>
-        <!-- Incluir la Sidebar -->
-        <?php include 'sidebarAlumno.php'; ?>
+</head>
+<body>
+    <!-- Incluir la Sidebar -->
+    <?php include 'sidebarAlumno.php'; ?>
 
-        <!-- Mostrar notificación -->
-        <?php if (!empty($mensaje)): ?>
-            <div class="notificacion" id="notificacion">
-                <?php echo $mensaje; ?>
-            </div>
-        <?php endif; ?>
-
-        <!-- Mostrar el archivo del módulo -->
-        <div class="material-modulo">
-            <h2>Material del Módulo</h2>
-            <?php if ($archivo): ?>
-                <p><strong>Nombre del archivo:</strong> <?php echo htmlspecialchars($archivo['nombre']); ?></p>
-                <p><strong>Tipo:</strong> <?php echo htmlspecialchars($archivo['tipo']); ?></p>
-                <a href="descargarArchivo.php?idArchivo=<?php echo $archivo['idArchivo']; ?>">Descargar archivo</a>
-            <?php else: ?>
-                <p>No hay material disponible para este módulo.</p>
-            <?php endif; ?>
+    <!-- Mostrar notificación -->
+    <?php if (!empty($mensaje)): ?>
+        <div class="notificacion" id="notificacion">
+            <?php echo $mensaje; ?>
         </div>
+    <?php endif; ?>
 
-        <!-- Mostrar las actividades asignadas -->
-        <div class="actividades-modulo">
-            <h2>Actividades Asignadas</h2>
-            <?php if ($resultActividades->num_rows > 0): ?>
-                <?php while ($actividad = $resultActividades->fetch_assoc()): ?>
-                    <div class="actividad">
-                        <h3><?php echo htmlspecialchars($actividad['titulo']); ?></h3>
-                        <p><?php echo htmlspecialchars($actividad['descripcion']); ?></p>
-                        <p><strong>Fecha de asignación:</strong> <?php echo htmlspecialchars($actividad['fecha']); ?></p>
-                        <p><strong>Fecha de vencimiento:</strong> <?php echo htmlspecialchars($actividad['fecha_vencimiento']); ?></p>
+    <!-- Mostrar el archivo del módulo -->
+    <div class="material-modulo">
+        <h2>Material del Módulo</h2>
+        <?php if ($archivo): ?>
+            <p><strong>Nombre del archivo:</strong> <?php echo htmlspecialchars($archivo['nombre']); ?></p>
+            <p><strong>Tipo:</strong> <?php echo htmlspecialchars($archivo['tipo']); ?></p>
+            <a href="descargarArchivo.php?idArchivo=<?php echo $archivo['idArchivo']; ?>">Descargar archivo</a>
+        <?php else: ?>
+            <p>No hay material disponible para este módulo.</p>
+        <?php endif; ?>
+    </div>
+
+    <!-- Mostrar las actividades asignadas -->
+    <div class="actividades-modulo">
+        <h2>Actividades Asignadas</h2>
+        <?php if ($resultActividades->num_rows > 0): ?>
+            <?php while ($actividad = $resultActividades->fetch_assoc()): ?>
+                <div class="actividad">
+                    <h3><?php echo htmlspecialchars($actividad['titulo']); ?></h3>
+                    <p><?php echo htmlspecialchars($actividad['descripcion']); ?></p>
+                    <p><strong>Fecha de asignación:</strong> <?php echo htmlspecialchars($actividad['fecha']); ?></p>
+                    <p><strong>Fecha de vencimiento:</strong> <?php echo htmlspecialchars($actividad['fecha_vencimiento']); ?></p>
+
+                    <?php
+                    // Verificar si el usuario ya ha subido una tarea para esta actividad
+                    $queryTareaSubida = "
+                        SELECT idTarea FROM tareas_alumnos 
+                        WHERE idActividad = ? AND idUsuario = ?";
+                    $stmtTareaSubida = $conn->prepare($queryTareaSubida);
+                    $stmtTareaSubida->bind_param("ii", $actividad['idActividad'], $idUsuario);
+                    $stmtTareaSubida->execute();
+                    $resultTareaSubida = $stmtTareaSubida->get_result();
+
+                    // Si ya se ha subido una tarea, no mostrar el formulario
+                    if ($resultTareaSubida->num_rows > 0):
+                    ?>
+                        <p style="color: green;">Ya has subido una tarea para esta actividad.</p>
+                    <?php else: ?>
                         <form action="subirTarea.php" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="idActividad" value="<?php echo $actividad['idActividad']; ?>">
                             <input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>">
@@ -158,28 +181,28 @@ if (isset($_GET['mensaje'])) {
                             <input type="file" style="color: black;" name="archivo" required>
                             <button type="submit" name="subirTarea">Subir Tarea</button>
                         </form>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No hay actividades asignadas para este módulo.</p>
-            <?php endif; ?>
-        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No hay actividades asignadas para este módulo.</p>
+        <?php endif; ?>
+    </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const notificacion = document.getElementById('notificacion');
-                if (notificacion) {
-                    notificacion.style.display = 'block'; // Muestra la notificación
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const notificacion = document.getElementById('notificacion');
+            if (notificacion) {
+                notificacion.style.display = 'block';
 
-                    // Desvanecer la notificación después de 3 segundos
+                setTimeout(() => {
+                    notificacion.style.opacity = '0';
                     setTimeout(() => {
-                        notificacion.style.opacity = '0'; // Comienza el desvanecimiento
-                        setTimeout(() => {
-                            notificacion.style.display = 'none'; // Oculta la notificación después del desvanecimiento
-                        }, 500); // Espera a que la transición de desvanecimiento termine
-                    }, 3000); // Espera 3 segundos
-                }
-            });
-        </script>
-    </body>
+                        notificacion.style.display = 'none';
+                    }, 500);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
 </html>

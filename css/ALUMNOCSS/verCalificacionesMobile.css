@@ -1,0 +1,94 @@
+/* ==========================================*/
+/* Mobile */
+/* Adaptación para pantallas pequeñas (ancho máximo: 767px) */
+@media (max-width: 767px) {
+    /* General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-image: url('../../img/cebe.jpeg'); /* Ruta de la imagen de fondo */
+        backdrop-filter: blur(5px); /* Difumina el fondo */
+        display: flex;
+        justify-content: flex-start; /* Alinea el contenido horizontalmente */
+        align-items: flex-start; /* Alinea el contenido verticalmente */
+        height: 100vh; /* Para ocupar toda la pantalla */
+        color: #ffffff;
+        padding: 10px; /* Reduce el padding en móviles */
+    }
+
+    /* Main content container */
+    .container {
+        width: 60%; /* Ocupa el ancho completo */
+        margin-left: 150px;
+        max-width: 100%; /* Sin límite de ancho máximo en móviles */
+        border-radius: 15px; /* Bordes redondeados */
+        padding: 15px; /* Reduce el padding para móviles */
+        display: flex;
+        flex-direction: column; /* Organiza todo en vertical */
+        align-items: center;
+        gap: 10px; /* Espacio entre elementos */
+        color: #333; /* Texto negro */
+    }
+
+    /* Contenedores de actividades */
+    .contenedor-actividad {
+        background-color: #fff; /* Fondo blanco */
+        border-radius: 10px; /* Bordes redondeados */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        padding: 20px; /* Espaciado interno */
+        margin-bottom: 15px; /* Espaciado entre cada contenedor */
+        width: 100%; /* Ocupa todo el ancho */
+        max-width: 600px; /* Ancho máximo */
+        display: flex;
+        flex-direction: column; /* Organiza el contenido verticalmente */
+        gap: 10px;
+    }
+
+    /* Estilos para el título de la actividad */
+    .contenedor-actividad h3 {
+        font-size: 1.5em; /* Tamaño del texto del título */
+        color: #333; /* Color del texto */
+        margin: 0;
+    }
+
+    /* Estilos para la descripción */
+    .contenedor-actividad p {
+        font-size: 1em; /* Tamaño del texto de la descripción */
+        color: #666; /* Texto ligeramente más claro */
+    }
+
+    /* Estilos para la calificación y estado */
+    .actividad-info {
+        display: flex;
+        flex-direction: column; /* Organiza verticalmente */
+        gap: 5px; /* Espacio entre los elementos */
+    }
+
+    .actividad-info span {
+        font-size: 1em;
+        color: #333; /* Texto principal en negro */
+    }
+
+    /* Botones generales */
+    button {
+        background-color: #333;
+        color: #fff;
+        padding: 8px 15px; /* Ajusta el tamaño del botón para móviles */
+        font-size: 1em; /* Reduce el tamaño de la fuente */
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        align-self: center;
+    }
+
+    button:hover {
+        background-color: #555; /* Cambio de color al pasar el cursor */
+    }
+}
